@@ -50,7 +50,7 @@
                         <tr>
                         <td>{{ $item->id }}</td>
                         <td>{{ $item->nome }}</td>
-                        <td>{{ $item->descrizione }}</td>
+                        <td>{{ str_limit($item->descrizione, 30) }}</td>
                         <td>{{ Carbon\Carbon::parse($item->data_creazione)->format('d/m/Y') }}</td>
                         <td>{{ $item->email }}</td>
                         <td>
