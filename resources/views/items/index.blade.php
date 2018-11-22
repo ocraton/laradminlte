@@ -41,7 +41,7 @@
                 </div>
               </div>
               <!-- /.card-header -->
-              <div class="card-body table-responsive p-0">
+              <div class="card-body">
                 <table class="table table-hover display" id="item-table">
                   <thead>
                   <tr>
