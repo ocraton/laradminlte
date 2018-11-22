@@ -1,4 +1,9 @@
 @extends('layouts.master')
+
+@section('head')
+<link rel="stylesheet" href="https://openlayers.org/en/v4.6.5/css/ol.css" type="text/css">
+@endsection
+
 @section('content')
  <!-- Content Wrapper. Contains page content -->
  <div class="content-wrapper">
@@ -25,32 +30,12 @@
       <div class="container-fluid">
         <div class="row">
           <div class="col-lg-6">
-            <div class="card">
+          <div class="card card-primary card-outline">
               <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-
-                <p class="card-text">
-                  Some quick example text to build on the card title and make up the bulk of the card's
-                  content.
-                </p>
-
-                <a href="#" class="card-link">Card link</a>
-                <a href="#" class="card-link">Another link</a>
+                    <h5 class="card-title">Items</h5>              
+                    <div id="map" style="width: 100%; height: 100%;"></div>
               </div>
             </div>
-
-            <div class="card card-primary card-outline">
-              <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-
-                <p class="card-text">
-                  Some quick example text to build on the card title and make up the bulk of the card's
-                  content.
-                </p>
-                <a href="#" class="card-link">Card link</a>
-                <a href="#" class="card-link">Another link</a>
-              </div>
-            </div><!-- /.card -->
           </div>
           <!-- /.col-md-6 -->
           <div class="col-lg-6">
@@ -87,4 +72,60 @@
   </div>
   <!-- /.content-wrapper -->
 
+@endsection
+
+
+@section('scripts')
+<script src="https://openlayers.org/en/v4.6.5/build/ol.js" type="text/javascript"></script>
+<script>
+
+window.onload = () => {
+  initialize_map(); 
+  add_map_point(41.924252, 12.652587);
+  add_map_point(43.124252, 13.652587);
+} 
+
+/* OSM & OL example code provided by https://mediarealm.com.au/ */
+  var map;
+  var mapLat = 41.924252;
+  var mapLng = 12.652587;
+  var mapDefaultZoom = 10;
+ 
+ function initialize_map() {
+    map = new ol.Map({
+    target: "map",
+    layers: [
+    new ol.layer.Tile({
+    source: new ol.source.OSM({
+    url: "https://a.tile.openstreetmap.org/{z}/{x}/{y}.png"
+    })
+    })
+    ],
+    view: new ol.View({
+    center: ol.proj.fromLonLat([mapLng, mapLat]),
+    zoom: mapDefaultZoom
+    })
+    });
+ }
+
+ function add_map_point(lat, lng) {
+    var vectorLayer = new ol.layer.Vector({
+    source:new ol.source.Vector({
+    features: [new ol.Feature({
+    geometry: new ol.geom.Point(ol.proj.transform([parseFloat(lng), parseFloat(lat)], 'EPSG:4326', 'EPSG:3857')),
+    })]
+    }),
+    style: new ol.style.Style({
+    image: new ol.style.Icon({
+    anchor: [0.5, 0.5],
+    anchorXUnits: "fraction",
+    anchorYUnits: "fraction",
+    src: "https://upload.wikimedia.org/wikipedia/commons/e/ec/RedDot.svg"
+    })
+    })
+    });
+    map.addLayer(vectorLayer);
+ }
+
+</script>
 @endsection
