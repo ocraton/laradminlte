@@ -9,8 +9,8 @@
 
   <title>{{ config('app.name', 'LaravelAdmin') }}</title>
 
-    <link rel="stylesheet" href="css/app.css">
-    
+  <link rel="stylesheet" href="css/app.css">
+  @yield('head')
 </head>
 <body class="hold-transition sidebar-mini">
 <div class="wrapper">
@@ -173,5 +173,6 @@
 <!-- REQUIRED SCRIPTS -->
 
 <script src="js/app.js"></script>
+@yield('scripts')
 </body>
 </html>

@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Model\Profile;
 use Illuminate\Http\Request;
 use App\Item;
+use Freshbitsweb\Laratables\Laratables;
+
 
 class ItemsController extends Controller
 {
@@ -14,10 +16,15 @@ class ItemsController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
+    {        
         $items = Item::latest()->paginate(10);
         return view('items.index',compact('items'))
                     ->with('i', (request()->input('page', 1) - 1) * 5);
+    }
+
+    public function getItemList() 
+    {
+        return Laratables::recordsOf(Item::class);
     }
 
     /**
