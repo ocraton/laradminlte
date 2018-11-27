@@ -25,6 +25,8 @@ class CreateItemsTable extends Migration
             $table->integer('cap')->nullable();
             $table->string('cellulare')->nullable();
             $table->string('email')->nullable();
+            $table->double('lat')->nullable();
+            $table->double('lon')->nullable();
             $table->timestamps();
         });
     }

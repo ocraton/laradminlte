@@ -1,7 +1,15 @@
 @extends('layouts.master')
 
 @section('head')
-<link rel="stylesheet" href="https://openlayers.org/en/v4.6.5/css/ol.css" type="text/css">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.4/dist/leaflet.css"
+   integrity="sha512-puBpdR0798OZvTTbP4A8Ix/l+A4dHDD0DGqYW6RQ+9jxkRFclaxxQb/SJAWZfWAkuyeQUytO7+7N4QKrDh+drA=="
+   crossorigin=""/>
+   <style>
+   #mapid {
+      height: 60vh;
+      width: 100%;
+    }
+   </style>
 @endsection
 
 @section('content')
@@ -33,7 +41,7 @@
           <div class="card card-primary card-outline">
               <div class="card-body">
                     <h5 class="card-title">Items</h5>              
-                    <div id="map" style="width: 100%; height: 100%;"></div>
+                    <div id="mapid"></div>
               </div>
             </div>
           </div>
@@ -76,56 +84,36 @@
 
 
 @section('scripts')
-<script src="https://openlayers.org/en/v4.6.5/build/ol.js" type="text/javascript"></script>
+<script src="https://unpkg.com/leaflet@1.3.4/dist/leaflet.js" integrity="sha512-nMMmRyTVoLYqjP9hrbed9S+FzjZHW5gY1TWCHA5ckwXZBadntCNs8kEqAWdrb9O7rxbCaA4lKTIWjDXZxflOcA==" crossorigin=""></script>
+  
 <script>
+  // center map
+  var rm = [41.9027835, 12.4963655];
+  // create map
+  var map = L.map('mapid').setView(rm, 6);
 
-window.onload = () => {
-  initialize_map(); 
-  add_map_point(41.924252, 12.652587);
-  add_map_point(43.124252, 13.652587);
-} 
+  // create tileLayer
+  L.tileLayer('https://a.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom: 20
+  }).addTo(map);
 
-/* OSM & OL example code provided by https://mediarealm.com.au/ */
-  var map;
-  var mapLat = 41.924252;
-  var mapLng = 12.652587;
-  var mapDefaultZoom = 10;
- 
- function initialize_map() {
-    map = new ol.Map({
-    target: "map",
-    layers: [
-    new ol.layer.Tile({
-    source: new ol.source.OSM({
-    url: "https://a.tile.openstreetmap.org/{z}/{x}/{y}.png"
-    })
-    })
-    ],
-    view: new ol.View({
-    center: ol.proj.fromLonLat([mapLng, mapLat]),
-    zoom: mapDefaultZoom
-    })
-    });
- }
+	var itemPlace = [
+    @foreach($items as $item)
+      [ {{ $item->lat }}, {{ $item->lon }} , '{{ $item->nome }}' ],
+    @endforeach
+  ];
+  
+  for (let i = 0; i < itemPlace.length; i++) {
+    add_marker(itemPlace[i][0], itemPlace[i][1], itemPlace[i][2])
+	}
 
- function add_map_point(lat, lng) {
-    var vectorLayer = new ol.layer.Vector({
-    source:new ol.source.Vector({
-    features: [new ol.Feature({
-    geometry: new ol.geom.Point(ol.proj.transform([parseFloat(lng), parseFloat(lat)], 'EPSG:4326', 'EPSG:3857')),
-    })]
-    }),
-    style: new ol.style.Style({
-    image: new ol.style.Icon({
-    anchor: [0.5, 0.5],
-    anchorXUnits: "fraction",
-    anchorYUnits: "fraction",
-    src: "https://upload.wikimedia.org/wikipedia/commons/e/ec/RedDot.svg"
-    })
-    })
-    });
-    map.addLayer(vectorLayer);
- }
+  function add_marker(lat, long, nome) {
+    var point = [lat, long];
+    // add marker
+    var marker = L.marker(point).addTo(map);
+    // add popup
+    marker.bindPopup('<p><b>'+nome+'</b><br><a href="">modifica</a></p>');
+  }
 
 </script>
 @endsection
