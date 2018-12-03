@@ -23,7 +23,7 @@ class HomeController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
+    {        
         $items = Item::all();        
         return view('home.home', compact('items'));
     }

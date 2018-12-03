@@ -19,5 +19,8 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::resource('items','ItemsController');
-Route::get('/itemdatatable', 'ItemsController@getItemList')->name('itemdatatable');
+
+Route::resource('items','ItemsController')->middleware(['auth','role:operator|admin']);
+
+Route::get('/itemdatatable', 'ItemsController@getItemList')->name('itemdatatable')
+        ->middleware(['auth','role:operator|admin']);
