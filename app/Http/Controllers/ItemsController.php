@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Model\Profile;
 use Illuminate\Http\Request;
+use Carbon;
 use App\Item;
+use Auth;
 use Freshbitsweb\Laratables\Laratables;
+use App\Http\Requests\ItemRequest;
+
 
 
 class ItemsController extends Controller
@@ -33,7 +36,7 @@ class ItemsController extends Controller
      */
     public function create()
     {
-        return "Item create";
+        return view('items.create');
     }
 
     /**
@@ -42,29 +45,58 @@ class ItemsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ItemRequest $request, Item $item)
     {
-        //
+
+        // try {
+            
+            $item->user_id = Auth::id();
+            $item->nome = $request->nome;            
+            $item->descrizione = $request->descrizione;
+            $item->data_creazione = Carbon\Carbon::parse($request->data_creazione)->format('Y-m-d H:i:s');
+            $item->indirizzo = $request->indirizzo;
+            $item->citta = $request->citta;
+            $item->provincia = $request->provincia;
+            $item->cap = $request->cap;
+            $item->cellulare = $request->cellulare;
+            $item->email = $request->email;
+            $item->save();
+        
+            flash()->success('Item created!');          
+
+        // } catch (\Exception $e) {
+
+        //     flash()->error('Impossibile salvare!');
+
+        // }
+
+        return redirect('items');
+
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Model\Profile  $profile
+     * @param  \App\Model\Item  $item
      * @return \Illuminate\Http\Response
      */
-    public function show(Profile $profile)
-    {
-        //
+    public function show(Request $request, Item $item)
+    {      
+        if($request->ajax()) {
+            $items_view = view('items.show', compact('item'))->render();
+            return response()->json(['viewinfo' => $items_view]); 
+        } else {
+            return redirect('items');
+        }
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Model\Profile  $profile
+     * @param  \App\Model\Item  $item
      * @return \Illuminate\Http\Response
      */
-    public function edit(Profile $profile)
+    public function edit(Item  $item)
     {
         //
     }
@@ -76,7 +108,7 @@ class ItemsController extends Controller
      * @param  \App\Model\Profile  $profile
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Profile $profile)
+    public function update(Request $request, Item  $item)
     {
         //
     }
@@ -87,7 +119,7 @@ class ItemsController extends Controller
      * @param  \App\Model\Profile  $profile
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Profile $profile)
+    public function destroy(Item  $item)
     {
         //
     }
