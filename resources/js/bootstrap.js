@@ -13,7 +13,7 @@ try {
 
     require('bootstrap');
     require('admin-lte');
-    require('inputmask/dist/jquery.inputmask.bundle.js');
+    require('inputmask/dist/jquery.inputmask.bundle.js');   
     
 } catch (e) {}
 

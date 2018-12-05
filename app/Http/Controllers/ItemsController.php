@@ -48,7 +48,7 @@ class ItemsController extends Controller
     public function store(ItemRequest $request, Item $item)
     {
 
-        // try {
+        try {
             
             $item->user_id = Auth::id();
             $item->nome = $request->nome;            
@@ -64,11 +64,11 @@ class ItemsController extends Controller
         
             flash()->success('Item created!');          
 
-        // } catch (\Exception $e) {
+        } catch (\Exception $e) {
 
-        //     flash()->error('Impossibile salvare!');
+            flash()->error('Impossibile salvare!');
 
-        // }
+        }
 
         return redirect('items');
 
@@ -96,9 +96,14 @@ class ItemsController extends Controller
      * @param  \App\Model\Item  $item
      * @return \Illuminate\Http\Response
      */
-    public function edit(Item  $item)
+    public function edit(Request $request, Item  $item)
     {
-        //
+        if($request->ajax()) {
+            $items_view = view('items.edit', compact('item'))->render();
+            return response()->json(['viewinfo' => $items_view]); 
+        } else {
+            return redirect('items');
+        }
     }
 
     /**
@@ -108,9 +113,17 @@ class ItemsController extends Controller
      * @param  \App\Model\Profile  $profile
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Item  $item)
+    public function update(ItemRequest $request, Item $item)
     {
-        //
+        try {
+                    
+            return response()->json(['viewinfo' => 'Saved!']);         
+
+        } catch (\Exception $e) {
+
+            return response()->json(['viewinfo' => 'Error']);
+
+        }
     }
 
     /**

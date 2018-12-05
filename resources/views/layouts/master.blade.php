@@ -96,20 +96,14 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="#" class="nav-link">
-                  <i class="fa fa-circle nav-icon"></i>
-                  <p>Page</p>
-                </a>
+                <a href="{{ route('home') }}" class="nav-link">
+                <i class="nav-icon fa fa-home" style="color:#38c172"></i>
+                  <p>
+                    Home
+                  </p>
+              </a>
               </li>
             </ul>
-          </li>
-          <li class="nav-item">
-            <a href="{{ route('home') }}" class="nav-link">
-              <i class="nav-icon fa fa-home" style="color:#38c172"></i>
-              <p>
-                Home
-              </p>
-            </a>
           </li>
           <li class="nav-item">
             <a href="{{ route('items.index') }}" class="nav-link">
