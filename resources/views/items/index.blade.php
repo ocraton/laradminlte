@@ -133,7 +133,13 @@ $( document ).ready(function() {
                 _token: $("#itemModal input[name=_token]").val(),
                 nome: $("#itemModal input[name=nome]").val(),
                 email: $("#itemModal input[name=email]").val(),
-                descrizione: $("#itemModal input[name=descrizione]").val()
+                descrizione: $("#itemModal input[name=descrizione]").val(),
+                indirizzo: $("#itemModal input[name=indirizzo]").val(),
+                citta: $("#itemModal input[name=citta]").val(),
+                provincia: $("#itemModal input[name=provincia]").val(),
+                cap: $("#itemModal input[name=cap]").val(),
+                cellulare: $("#itemModal input[name=cellulare]").val(),
+                data_creazione: $("#itemModal input[name=data_creazione]").val()
             }
             $.ajax({
                 url: $('#itemModal form').attr('action'),
