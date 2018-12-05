@@ -49,19 +49,9 @@ class ItemsController extends Controller
     {
 
         try {
-            
-            $item->user_id = Auth::id();
-            $item->nome = $request->nome;            
-            $item->descrizione = $request->descrizione;
-            $item->data_creazione = Carbon\Carbon::parse($request->data_creazione)->format('Y-m-d H:i:s');
-            $item->indirizzo = $request->indirizzo;
-            $item->citta = $request->citta;
-            $item->provincia = $request->provincia;
-            $item->cap = $request->cap;
-            $item->cellulare = $request->cellulare;
-            $item->email = $request->email;
-            $item->save();
-        
+
+            $this->saveItem($request, $item);
+
             flash()->success('Item created!');          
 
         } catch (\Exception $e) {
@@ -116,7 +106,9 @@ class ItemsController extends Controller
     public function update(ItemRequest $request, Item $item)
     {
         try {
-                    
+
+            $this->saveItem($request, $item);
+            
             return response()->json(['viewinfo' => 'Saved!']);         
 
         } catch (\Exception $e) {
@@ -136,4 +128,22 @@ class ItemsController extends Controller
     {
         //
     }
+
+    private function saveItem(ItemRequest $request, Item $item) { 
+
+        $item->user_id = Auth::id();
+        $item->nome = $request->nome;            
+        $item->descrizione = $request->descrizione;
+        $item->data_creazione = Carbon\Carbon::parse($request->data_creazione)->format('Y-m-d H:i:s');
+        $item->indirizzo = $request->indirizzo;
+        $item->citta = $request->citta;
+        $item->provincia = $request->provincia;
+        $item->cap = $request->cap;
+        $item->cellulare = $request->cellulare;
+        $item->email = $request->email;
+        $item->save();
+
+        return $item;
+    }
+
 }
