@@ -15,6 +15,7 @@ try {
     require('admin-lte');
     require('inputmask/dist/jquery.inputmask.bundle.js');
     require('sweetalert');
+    require('datatables.net-bs4');
     
 } catch (e) {}
 
