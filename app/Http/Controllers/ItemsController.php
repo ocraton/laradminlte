@@ -124,9 +124,22 @@ class ItemsController extends Controller
      * @param  \App\Model\Profile  $profile
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Item  $item)
-    {
-        //
+    public function destroy($id)
+    {        
+        try {
+
+            $item = Item::findOrFail($id);
+            $item->delete();
+
+            return response()->json(['viewinfo' =>'Item Successfully deleted!']);          
+
+        } catch (\Exception $e) {
+
+            return response()->json(['viewinfo' =>'Impossibile delete Item']);
+
+        }
+
+        return redirect('items');
     }
 
     private function saveItem(ItemRequest $request, Item $item) { 
@@ -134,7 +147,7 @@ class ItemsController extends Controller
         $item->user_id = Auth::id();
         $item->nome = $request->nome;            
         $item->descrizione = $request->descrizione;
-        $item->data_creazione = Carbon\Carbon::parse($request->data_creazione)->format('Y-m-d H:i:s');
+        $item->data_creazione = Carbon\Carbon::createFromFormat('d/m/Y', $request->data_creazione)->toDateTimeString();        
         $item->indirizzo = $request->indirizzo;
         $item->citta = $request->citta;
         $item->provincia = $request->provincia;
