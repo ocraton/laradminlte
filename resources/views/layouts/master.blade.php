@@ -104,7 +104,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="" class="nav-link">
+            <a href="{{ route('locazioni.index') }}" class="nav-link">
               <i class="nav-icon fa fa-building" style="color: #d65bff"></i>
               <p>
                 Locazioni
@@ -112,22 +112,14 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="" class="nav-link">
+            <a href="{{ route('ups.index') }}" class="nav-link">
               <i class="nav-icon fa fa-battery-half" style="color: #ffe62d"></i>
               <p>
                 UPS
               </p>
             </a>
           </li>
-          @endrole
-          <li class="nav-item">
-            <a href="{{ route('items.index') }}" class="nav-link">
-              <i class="nav-icon fa fa-tags" style="color: #f6993f"></i>
-              <p>
-                Items
-              </p>
-            </a>
-          </li>          
+          @endrole         
           <li class="nav-item">
               <a class="nav-link" href="{{ route('logout') }}" onclick="event.preventDefault();
                 document.getElementById('logout-form-side').submit();">                         
@@ -157,10 +149,7 @@
             <h1 class="m-0 text-dark"> @yield('titlepage')</h1>
           </div><!-- /.col -->
           <div class="col-sm-6">
-            <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">Starter Page</li>
-            </ol>
+
           </div><!-- /.col -->
         </div><!-- /.row -->
       </div><!-- /.container-fluid -->
@@ -194,10 +183,10 @@
   <footer class="main-footer">
     <!-- To the right -->
     <div class="float-right d-none d-sm-inline">
-      Anything you want
+      
     </div>
     <!-- Default to the left -->
-    <strong>Copyright &copy; 2014-2018 <a href="https://adminlte.io">AdminLTE.io</a>.</strong> All rights reserved.
+    <strong>upsmanager</strong> 
   </footer>
 </div>
 <!-- ./wrapper -->

@@ -27,3 +27,11 @@ Route::get('/itemdatatable', 'ItemsController@getItemList')->name('itemdatatable
 Route::resource('clienti', 'ClientiController')->middleware(['auth','role:admin']);
 Route::get('/clientidatatable', 'ClientiController@getClientiList')->name('clientidatatable')
         ->middleware(['auth','role:admin']);
+
+Route::resource('locazioni', 'LocazioniController')->middleware(['auth','role:admin']);
+Route::get('/locazionidatatable', 'LocazioniController@getLocazioniList')->name('locazionidatatable')
+        ->middleware(['auth','role:admin']);        
+
+Route::resource('ups', 'UpsController')->middleware(['auth','role:admin']);
+Route::get('/upsdatatable', 'UpsController@getUpsList')->name('upsdatatable')
+        ->middleware(['auth','role:admin']);        

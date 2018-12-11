@@ -3,6 +3,13 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Carbon;
+use App\Locazione;
+use App\User;
+use Auth;
+use Freshbitsweb\Laratables\Laratables;
+use App\Http\Requests\LocazioneRequest;
+
 
 class LocazioniController extends Controller
 {
@@ -12,8 +19,17 @@ class LocazioniController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
+    {        
+        $locazioni = Locazione::latest()->paginate(10);
+        return view('locazioni.index',compact('locazioni'));
+    }
+
+    public function getLocazioniList() 
     {
-        //
+        return Laratables::recordsOf(Locazione::class, function($query)
+        {
+            return $query->with('user');
+        });
     }
 
     /**
@@ -23,7 +39,8 @@ class LocazioniController extends Controller
      */
     public function create()
     {
-        //
+        $clienti = User::role('cliente')->latest()->get();
+        return view('locazioni.create', compact('clienti'));
     }
 
     /**
@@ -32,9 +49,26 @@ class LocazioniController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(LocazioneRequest $request, Locazione $locazione)
     {
-        //
+        try {
+
+            $locazione->user_id = $request->cliente;            
+            $locazione->regione = $request->regione;            
+            $locazione->provincia = $request->provincia;            
+            $locazione->citta = $request->citta;            
+            $locazione->indirizzo = $request->indirizzo;                        
+            $locazione->save();
+
+            flash()->success('Locazione creata!');          
+
+        } catch (\Exception $e) {
+
+            flash()->error('Impossibile salvare!');
+
+        }
+
+        return redirect('locazioni');
     }
 
     /**
@@ -43,9 +77,14 @@ class LocazioniController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
-    {
-        //
+    public function show(Request $request, Locazione $locazioni)
+    {              
+        if($request->ajax()) {
+            $locazione_view = view('locazioni.show', compact('locazioni'))->render();
+            return response()->json(['viewinfo' => $locazione_view]); 
+        } else {
+            return redirect('locazioni');
+        }
     }
 
     /**
@@ -54,9 +93,15 @@ class LocazioniController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Request $request, Locazione $locazioni)
     {
-        //
+        $clienti = User::role('cliente')->latest()->get();        
+        if($request->ajax()) {
+            $locazione_view = view('locazioni.edit', compact('locazioni', 'clienti'))->render();
+            return response()->json(['viewinfo' => $locazione_view]); 
+        } else {
+            return redirect('locazioni');
+        }
     }
 
     /**
@@ -66,9 +111,26 @@ class LocazioniController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(LocazioneRequest $request)
     {
-        //
+        try {
+            
+            $locazione = Locazione::find($request->segment(2));
+            $locazione->user_id = $request->cliente;            
+            $locazione->regione = $request->regione;            
+            $locazione->provincia = $request->provincia;            
+            $locazione->citta = $request->citta;            
+            $locazione->indirizzo = $request->indirizzo;  
+                                 
+            $locazione->save();
+            
+            return response()->json(['viewinfo' => 'Salvato!']);         
+
+        } catch (\Exception $e) {
+
+            return response()->json(['viewinfo' => 'Error']);
+
+        }
     }
 
     /**
@@ -79,6 +141,19 @@ class LocazioniController extends Controller
      */
     public function destroy($id)
     {
-        //
+        try {
+
+            $locazione = Locazione::findOrFail($id);
+            $locazione->delete();
+
+            return response()->json(['viewinfo' =>'Locazione cancellato con successo!']);          
+
+        } catch (\Exception $e) {
+
+            return response()->json(['viewinfo' =>'Impossibile cancellare la locazione']);
+
+        }
+
+        return redirect('locazioni');
     }
 }

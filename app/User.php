@@ -29,6 +29,12 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
+
+    public function locazioni()
+    {
+        return $this->hasMany(Locazioni::class);
+    }
+
     public static function laratablesCustomAction($cliente)
     {
         return view('clienti.index_action', compact('cliente'))->render();

@@ -12,7 +12,7 @@
     @include ('errors.list')   
     <div class="card card-primary">
               <div class="card-header">
-                <h3 class="card-title">Create nuovo Cliente</h3>
+                <h3 class="card-title">Crea nuovo Cliente</h3>
               </div>
               <!-- /.card-header -->
               <!-- form start -->              
@@ -91,14 +91,14 @@
 <script>
 $( document ).ready(function() {    
 
-/*     
+    
     $('#btnSubmit').on('click', function(e){
 
         e.preventDefault();
         $(this).html('<i class="fa fa-spinner fa-spin" aria-hidden="true"></i>');
         $("form").submit();
 
-    }) */
+    })
     
 });
 </script>
