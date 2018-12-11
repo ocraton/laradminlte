@@ -17,7 +17,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'username', 'ragione_sociale', 'email', 'password',
     ];
 
     /**
@@ -28,4 +28,10 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public static function laratablesCustomAction($cliente)
+    {
+        return view('clienti.index_action', compact('cliente'))->render();
+    }
+
 }

@@ -13,11 +13,11 @@
                         @csrf
         <div class="input-group mb-3">
           
-          <input id="email" type="email" placeholder="{{ __('Email') }}" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" required autofocus>
+          <input id="username" type="text" placeholder="{{ __('Username') }}" class="form-control{{ $errors->has('username') ? ' is-invalid' : '' }}" name="username" value="{{ old('username') }}" required autofocus>
 
-            @if ($errors->has('email'))
+            @if ($errors->has('username'))
                 <span class="invalid-feedback" role="alert">
-                    <strong>{{ $errors->first('email') }}</strong>
+                    <strong>{{ $errors->first('username') }}</strong>
                 </span>
             @endif
           <div class="input-group-append">

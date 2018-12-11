@@ -21,6 +21,9 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 
 Route::resource('items','ItemsController')->middleware(['auth','role:operator|admin']);
-
 Route::get('/itemdatatable', 'ItemsController@getItemList')->name('itemdatatable')
         ->middleware(['auth','role:operator|admin']);
+
+Route::resource('clienti', 'ClientiController')->middleware(['auth','role:admin']);
+Route::get('/clientidatatable', 'ClientiController@getClientiList')->name('clientidatatable')
+        ->middleware(['auth','role:admin']);

@@ -22,8 +22,8 @@ class RouteServiceProvider extends ServiceProvider
      * @return void
      */
     public function boot()
-    {        
-        Route::model('items', App\Item::class);
+    {                
+        Route::model('items', App\Item::class);        
         parent::boot();
     }
 

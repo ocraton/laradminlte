@@ -16,7 +16,7 @@
               </div>
               <!-- /.card-header -->
               <!-- form start -->              
-              <form method="post" action="{{ url('items') }}" role="form">
+              <form method="post" action="{{ route('items.store') }}" role="form">
               @csrf
                 <div class="card-body">
                     <div class="row">

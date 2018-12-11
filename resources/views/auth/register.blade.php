@@ -9,8 +9,8 @@
             @csrf
             <div class="input-group mb-3">
 
-                <input id="name" placeholder="{{ __('Name') }}" type="text" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}"
-                    name="name" value="{{ old('name') }}" required autofocus>
+                <input id="username" placeholder="{{ __('Username') }}" type="text" class="form-control{{ $errors->has('username') ? ' is-invalid' : '' }}"
+                    name="username" value="{{ old('username') }}" required autofocus>
 
                 @if ($errors->has('name'))
                 <span class="invalid-feedback" role="alert">
@@ -22,18 +22,6 @@
                 </div>
             </div>
 
-            <div class="input-group mb-3">
-                <input id="email" placeholder="{{ __('Email') }}" type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}"
-                    name="email" value="{{ old('email') }}" required>
-                @if ($errors->has('email'))
-                <span class="invalid-feedback" role="alert">
-                    <strong>{{ $errors->first('email') }}</strong>
-                </span>
-                @endif
-                <div class="input-group-append">
-                    <span class="fa fa-envelope input-group-text"></span>
-                </div>
-            </div>
             <div class="input-group mb-3">
                 <input id="password" placeholder="{{ __('Password') }}" type="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}"
                     name="password" required>
