@@ -55,7 +55,7 @@
     <a href="{{ route('home') }}" class="brand-link">
       <img src="{{ asset('img/logo.png') }}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
            style="opacity: .8">
-      <span class="brand-text font-weight-light">{{ config('app.name', 'LaravelAdmin') }}</span>
+      <span class="brand-text font-weight-light">{{ config('app.name', '') }}</span>
     </a>
 
     <!-- Sidebar -->
@@ -79,7 +79,7 @@
             <a href="#" class="nav-link active">
               <i class="nav-icon fa fa-tachometer-alt"></i>
               <p>
-                Starter Pages
+                Start
                 <i class="right fa fa-angle-left"></i>
               </p>
             </a>

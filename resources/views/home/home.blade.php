@@ -6,7 +6,7 @@
    crossorigin=""/>
    <style>
    #mapid {
-      height: 60vh;
+      height: 75vh;
       width: 100%;
     }
    </style>
@@ -20,25 +20,50 @@
 
 
         <div class="row">
-          <div class="col-lg-6">
+          <div class="col-lg-8">
           <div class="card card-primary card-outline">
               <div class="card-body">
-                    <h5 class="card-title">Items</h5>              
+                    <h5 class="card-title">Locazioni</h5>              
                     <div id="mapid"></div>
               </div>
             </div>
           </div>
           <!-- /.col-md-6 -->
-          <div class="col-lg-6">
-            <div class="card card-primary card-outline">
+          <div class="col-lg-4">
+            <div class="card card-danger card-outline">
               <div class="card-header">
-                <h5 class="m-0">Featured</h5>
+                <h5 class="m-0">Ups</h5>
               </div>
               <div class="card-body">
-                <h6 class="card-title">Special title treatment</h6>
+                <h6 class="card-title">Ups con fault 
+                  <span class="badge badge-danger ">
+                    {{ count($ups) }}
+                  </span></h6>
+                <ul class="list-group">
+                  
+                  @foreach($ups as $upsitem)
+                  <li class="list-group-item @if($upsitem->stato == 2) list-group-item-danger @else list-group-item-warning @endif">
+                        <p >
+                          Numero di serie: 
+                          <br>
+                          {{ $upsitem->numero_serie }}
+                        </p>
+                        <p style="font-size: 0.8rem">
+                          Locazione <br>
+                          Id: {{ $upsitem->locazione->id }} - 
+                          regione: {{ $upsitem->locazione->regione }} -
+                          provincia: {{ $upsitem->locazione->provincia }} -
+                          citta: {{ $upsitem->locazione->citta }} -
+                          indirizzo: {{ $upsitem->locazione->indirizzo }}
+                          <br>
+                          <a href="">visualizza</a>
+                        </p >                        
+                  </li>
+                  @endforeach
 
-                <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                <a href="#" class="btn btn-primary">Go somewhere</a>
+                </ul>
+                
+
               </div>
             </div>
           </div>
@@ -66,21 +91,21 @@
   }).addTo(map);
 
 	var itemPlace = [
-    @foreach($items as $item)
-      [ {{ $item->lat }}, {{ $item->lon }} , '{{ $item->nome }}' ],
+    @foreach($locazioni as $locazione)
+      [ {{ $locazione->lat }}, {{ $locazione->lon }} , '{{ $locazione->id }}', '{{ $locazione->ups }}' ],
     @endforeach
   ];
   
   for (let i = 0; i < itemPlace.length; i++) {
-    add_marker(itemPlace[i][0], itemPlace[i][1], itemPlace[i][2])
+    add_marker(itemPlace[i][0], itemPlace[i][1], itemPlace[i][2], itemPlace[i][3])
 	}
 
-  function add_marker(lat, long, nome) {
+  function add_marker(lat, long, nome, ups) {
     var point = [lat, long];
     // add marker
     var marker = L.marker(point).addTo(map);
     // add popup
-    marker.bindPopup('<p><b>'+nome+'</b><br><a href="">modifica</a></p>');
+    marker.bindPopup('<p><b>'+nome+'</b><br>'+ups+'<br><a href="">modifica</a></p>');
   }
 
 </script>

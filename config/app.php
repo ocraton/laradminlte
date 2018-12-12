@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'name' => env('APP_NAME', 'LaravelAdmin'),
+    'name' => env('APP_NAME', 'UpsManager'),
 
     /*
     |--------------------------------------------------------------------------

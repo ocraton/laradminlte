@@ -32,6 +32,13 @@ Route::resource('locazioni', 'LocazioniController')->middleware(['auth','role:ad
 Route::get('/locazionidatatable', 'LocazioniController@getLocazioniList')->name('locazionidatatable')
         ->middleware(['auth','role:admin']);        
 
-Route::resource('ups', 'UpsController')->middleware(['auth','role:admin']);
+
+Route::get('ups', 'UpsController@index')->name('ups.index')->middleware(['auth','role:admin']);     
+Route::post('ups', 'UpsController@store')->name('ups.store')->middleware(['auth','role:admin']);
+Route::get('ups/create', 'UpsController@create')->name('ups.create')->middleware(['auth','role:admin']);
+Route::get('ups/{ups}', 'UpsController@show')->name('ups.show')->middleware(['auth','role:admin']);
+Route::put('ups/{ups}', 'UpsController@update')->name('ups.update')->middleware(['auth','role:admin']);
+Route::delete('ups/{ups}', 'UpsController@destroy')->name('ups.destroy')->middleware(['auth','role:admin']);
+Route::get('ups/{ups}/edit', 'UpsController@edit')->name('ups.edit')->middleware(['auth','role:admin']);
 Route::get('/upsdatatable', 'UpsController@getUpsList')->name('upsdatatable')
         ->middleware(['auth','role:admin']);        

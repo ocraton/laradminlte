@@ -25,7 +25,7 @@ class Locazione extends Model
 
     public function ups()
     {
-        return $this->hasMany(Ups::class);
+        return $this->hasMany(Ups::class, 'locazione_id');
     }
 
     public static function laratablesCustomAction($locazione)

@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Item;
+use App\Locazione;
+use App\User;
+use App\Ups;
 
 class HomeController extends Controller
 {
@@ -24,7 +27,8 @@ class HomeController extends Controller
      */
     public function index()
     {        
-        $items = Item::all();        
-        return view('home.home', compact('items'));
+        $locazioni = Locazione::with('ups')->get();
+        $ups = Ups::where('stato', 2)->orWhere('stato', 1)->with('locazione')->get();        
+        return view('home.home', compact('locazioni', 'ups'));
     }
 }

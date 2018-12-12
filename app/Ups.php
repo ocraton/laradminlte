@@ -19,13 +19,9 @@ class Ups extends Model
         return $this->belongsTo(Locazione::class, 'locazione_id');
     }
 
-    public static function laratablesCustomAction($locazione)
+    public static function laratablesCustomAction($ups)
     {
-        return view('locazioni.index_action', compact('locazione'))->render();
+        return view('ups.index_action', compact('ups'))->render();
     }
 
-    public function laratablesIndirizzo()
-    {
-        return str_limit($this->indirizzo, 40);
-    }
 }
