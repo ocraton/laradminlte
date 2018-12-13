@@ -69,7 +69,7 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                {{ config('app.name', 'LaravelAdmin') }}
+                {{ config('app.name', 'UpsManager') }}
                 </div>
 
                 <div class="links">

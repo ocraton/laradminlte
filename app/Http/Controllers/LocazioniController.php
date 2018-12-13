@@ -20,16 +20,30 @@ class LocazioniController extends Controller
      */
     public function index()
     {        
-        $locazioni = Locazione::latest()->paginate(10);
+        $role = Auth::user()->getRoleNames();        
+        if($role[0] == 'cliente') {
+            $locazioni = Locazione::where('user_id', Auth::id())->latest()->paginate(10);
+        } else {
+            $locazioni = Locazione::latest()->paginate(10);
+        }             
         return view('locazioni.index',compact('locazioni'));
     }
 
     public function getLocazioniList() 
     {
-        return Laratables::recordsOf(Locazione::class, function($query)
-        {
-            return $query->with('user');
-        });
+        $role = Auth::user()->getRoleNames();
+        if($role[0] == 'cliente') {            
+            return Laratables::recordsOf(Locazione::class, function($query)
+            {
+                return $query->where('user_id', Auth::id())->with('user');
+            });            
+        } else {
+            return Laratables::recordsOf(Locazione::class, function($query)
+            {
+                return $query->with('user');
+            });
+        }
+        
     }
 
     /**

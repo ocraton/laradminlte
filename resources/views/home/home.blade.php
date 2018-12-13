@@ -35,31 +35,50 @@
                 <h5 class="m-0">Ups</h5>
               </div>
               <div class="card-body">
-                <h6 class="card-title">Ups con fault 
+                <h6 class="card-title">Ups con fault
+                  @if(count($ups) > 0) 
                   <span class="badge badge-danger ">
                     {{ count($ups) }}
-                  </span></h6>
+                  </span>
+                  @else
+                  <span class="badge badge-success ">
+                    {{ count($ups) }}
+                  </span>
+                  @endif
+                  
+                  </h6>
                 <ul class="list-group">
                   
-                  @foreach($ups as $upsitem)
-                  <li class="list-group-item @if($upsitem->stato == 2) list-group-item-danger @else list-group-item-warning @endif">
-                        <p >
-                          Numero di serie: 
-                          <br>
-                          {{ $upsitem->numero_serie }}
-                        </p>
-                        <p style="font-size: 0.8rem">
-                          Locazione <br>
-                          Id: {{ $upsitem->locazione->id }} - 
-                          regione: {{ $upsitem->locazione->regione }} -
-                          provincia: {{ $upsitem->locazione->provincia }} -
-                          citta: {{ $upsitem->locazione->citta }} -
-                          indirizzo: {{ $upsitem->locazione->indirizzo }}
-                          <br>
-                          <a href="">visualizza</a>
-                        </p >                        
-                  </li>
-                  @endforeach
+                  @if(count($ups) > 0)
+                    @foreach($ups as $upsitem)
+                    <li class="list-group-item @if($upsitem->stato == 2) list-group-item-danger @elseif($upsitem->stato == 1) list-group-item-warning @else @endif">
+                          <p >
+                            Numero di serie: 
+                            <br>
+                            {{ $upsitem->numero_serie }}
+                            <br>
+                            <a href="">visualizza</a>
+                          </p>
+                          <p style="font-size: 0.8rem">
+                            Locazione <br>
+                            Id: {{ $upsitem->locazione->id }} - 
+                            regione: {{ $upsitem->locazione->regione }} -
+                            provincia: {{ $upsitem->locazione->provincia }} -
+                            citta: {{ $upsitem->locazione->citta }} -
+                            indirizzo: {{ $upsitem->locazione->indirizzo }}                                                        
+                          </p >                        
+                    </li>
+                    @endforeach
+                  @else
+                      <div class="alert alert-success">                  
+                      
+                      <p class="info"><i class="icon fa fa-check"></i> 
+                      Non ci sono ups in stato di fault
+                      </p>   
+                        <input type="hidden" name="stato" id="stato" value="-1">
+                    </div>
+                  @endif
+              
 
                 </ul>
                 

@@ -7,7 +7,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-  <title>{{ config('app.name', 'LaravelAdmin') }}</title>
+  <title>{{ config('app.name', 'UpsManager') }}</title>
 
     <link rel="stylesheet" href="css/app.css">
     
@@ -15,7 +15,7 @@
 <body class="hold-transition login-page">
 <div class="login-box">
   <div class="login-logo">
-    <a href="/"><b>{{ config('app.name', 'LaravelAdmin') }}</b></a>
+    <a href="/"><b>{{ config('app.name', 'UpsManager') }}</b></a>
   </div>
   @yield('content')
   

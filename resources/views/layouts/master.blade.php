@@ -7,7 +7,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-  <title>{{ config('app.name', 'LaravelAdmin') }}</title>
+  <title>{{ config('app.name', 'UpsManager') }}</title>
 
   <link rel="stylesheet" href="{{ asset('css/app.css') }}">
   @yield('head')
@@ -55,7 +55,7 @@
     <a href="{{ route('home') }}" class="brand-link">
       <img src="{{ asset('img/logo.png') }}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
            style="opacity: .8">
-      <span class="brand-text font-weight-light">{{ config('app.name', '') }}</span>
+      <span class="brand-text font-weight-light">{{ config('app.name', 'UpsManager') }}</span>
     </a>
 
     <!-- Sidebar -->
@@ -103,6 +103,8 @@
               </p>
             </a>
           </li>
+          @endrole
+          @role('admin|operator|cliente')
           <li class="nav-item">
             <a href="{{ route('locazioni.index') }}" class="nav-link">
               <i class="nav-icon fa fa-building" style="color: #d65bff"></i>
@@ -111,6 +113,8 @@
               </p>
             </a>
           </li>
+          @endrole
+          @role('admin|operator')
           <li class="nav-item">
             <a href="{{ route('ups.index') }}" class="nav-link">
               <i class="nav-icon fa fa-battery-half" style="color: #ffe62d"></i>

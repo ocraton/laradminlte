@@ -32,12 +32,12 @@ class User extends Authenticatable
 
     public function locazioni()
     {
-        return $this->hasMany(Locazioni::class, 'user_id');
+        return $this->hasMany(Locazione::class);
     }
 
     public function ups()
     {
-        return $this->hasManyThrough(Ups::class, Locazioni::class);
+        return $this->hasManyThrough(Ups::class, Locazione::class);
     }
 
     public static function laratablesCustomAction($cliente)

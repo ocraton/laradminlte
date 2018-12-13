@@ -14,10 +14,11 @@ Locazioni
           @include('flash::message')
           <div class="card">
               <div class="card-header">
+                @role('admin')
                 <h3 class="card-title">
                     <a class="btn btn-success" href="{{ route('locazioni.create') }}"> Crea nuova Locazione</a> 
                 </h3>
-
+                @endrole
                 <div class="card-tools">                                    
                  
                 </div>
