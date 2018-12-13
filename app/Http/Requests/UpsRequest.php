@@ -27,8 +27,7 @@ class UpsRequest extends FormRequest
          
         $rules = [
             'ip_address' => 'required|max:20',
-            'numero_serie' => 'required|max:20',
-            'stato' => 'required|max:1|numeric',            
+            'numero_serie' => 'required|max:20'           
         ];
 
 

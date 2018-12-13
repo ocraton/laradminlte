@@ -55,8 +55,8 @@ class UpsController extends Controller
 
             $ups->locazione_id = $request->locazione;            
             $ups->numero_serie = $request->numero_serie;            
-            $ups->ip_address = $request->ip_address;            
-            $ups->stato = $request->stato;                        
+            $ups->ip_address = $request->ip_address;  
+            $ups->stato = $request->stato;                                             
             $ups->save();
 
             flash()->success('Ups creato!');          
@@ -118,7 +118,7 @@ class UpsController extends Controller
             $ups->locazione_id = $request->locazione;            
             $ups->numero_serie = $request->numero_serie;            
             $ups->ip_address = $request->ip_address;            
-            $ups->stato = $request->stato;                        
+            $ups->stato = ($request->stato == '') ? -1 : $request->stato;                        
             $ups->save();
             
             return response()->json(['viewinfo' => 'Salvato!']);         

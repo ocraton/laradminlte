@@ -55,25 +55,12 @@
                     </div>
                     <div class="row">    
                         <div class="form-group col-sm-6">
-                            <div class="form-group">
-                                <label for="stato">Stato</label>
-                                <br>
-                                <div class="form-check form-check">
-                                <input class="form-check-input" type="radio" 
-                                name="stato" id="stato0" value="0" checked>
-                                <label class="form-check-label" for="stato0">nessun fault</label>
-                                </div>
-                                <div class="form-check form-check">
-                                <input class="form-check-input" type="radio" 
-                                name="stato" id="stato1" value="1">
-                                <label class="form-check-label" for="stato1">fault lieve</label>
-                                </div>
-                                <div class="form-check form-check">
-                                <input class="form-check-input" type="radio" 
-                                name="stato" id="stato2" value="2">
-                                <label class="form-check-label" for="stato2">fault grave</label>
-                                </div>
-                            </div>
+                        <div class="alert alert-info">                  
+                  
+                  <p class="info"><i class="icon fa fa-info"></i> Verrà inizializzato con uno stato di default</p>   
+                    <input type="hidden" name="stato" id="stato" value="-1">
+                </div>
+                                                             
                         </div>
                     </div>
                 </div>
