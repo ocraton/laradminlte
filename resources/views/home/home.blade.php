@@ -23,7 +23,10 @@
           <div class="col-lg-8">
           <div class="card card-primary card-outline">
               <div class="card-body">
-                    <h5 class="card-title">Locazioni</h5>              
+                    <h5 class="card-title">Locazioni</h5>
+                    <h6>Stato 0  <span style="height: 1rem; width: 1rem; background-color: #75d35b; border-radius: 50%; display: inline-block;"></span> = nessun fault 
+                    | Stato 1 <span style="height: 1rem; width: 1rem; background-color: #ffd400; border-radius: 50%; display: inline-block;"></span> = fault lieve 
+                    | Stato 2 <span style="height: 1rem; width: 1rem; background-color: #e54b4b; border-radius: 50%; display: inline-block;"></span> = fault grave</h6>              
                     <div id="mapid"></div>
               </div>
             </div>
@@ -128,7 +131,7 @@
 
     const coloreStatoDefault = '#75d35b'
     const coloreStato0 = '#75d35b'
-    const coloreStato1 = '#e5d64b'
+    const coloreStato1 = '#ffd400'
     const coloreStato2 = '#e54b4b'
 
     upsHtml = '';

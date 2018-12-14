@@ -40,7 +40,12 @@
             <span class="nav-link"><b>indirizzo ip:</b>  {{ $ups->ip_address }}   </span>     
         </li>
         <li class="nav-item">
-            <span class="nav-link"><b>Stato:</b>  {{ $ups->stato }}   </span>     
+            <span class="nav-link"><b>Stato:</b>  
+              <span style="height: 1rem; width: 1rem; 
+              background-color: 
+              @if($ups->stato == 2) {{ COLORESTATO2 }} @elseif($ups->stato == 1) {{ COLORESTATO1 }} @else {{ COLORESTATO0 }} @endif
+              ; border-radius: 50%; display: inline-block;"></span>
+            </span>     
         </li>
       </ul>
       </div>
