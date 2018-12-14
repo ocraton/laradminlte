@@ -71,7 +71,9 @@ class LocazioniController extends Controller
             $locazione->regione = $request->regione;            
             $locazione->provincia = $request->provincia;            
             $locazione->citta = $request->citta;            
-            $locazione->indirizzo = $request->indirizzo;                        
+            $locazione->indirizzo = $request->indirizzo;
+            $locazione->lat = $request->lat; 
+            $locazione->lon = $request->lon;                         
             $locazione->save();
 
             flash()->success('Locazione creata!');          

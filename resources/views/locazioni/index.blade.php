@@ -128,7 +128,9 @@ $( document ).ready(function() {
                     indirizzo: $("#locazioniModal input[name=indirizzo]").val(),
                     citta: $("#locazioniModal input[name=citta]").val(),
                     provincia: $("#locazioniModal #provincia option:selected").val(),
-                    regione: $("#locazioniModal #regione option:selected").val()
+                    regione: $("#locazioniModal #regione option:selected").val(),
+                    lat: $("#locazioniModal input[name=lat]").val(),
+                    lon: $("#locazioniModal input[name=lon]").val()
                 }
                 $.ajax({
                     url: $('#locazioniModal form').attr('action'),

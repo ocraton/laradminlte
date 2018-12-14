@@ -136,7 +136,7 @@
 
     upsHtml = '';
     let countRosso = countGiallo = 0;
-    for(let i=0;i<ups.length;i++){            
+    for(let i=0;i<ups.length;i++) {            
       if(ups[i].stato == 2) {countRosso++; coloreTestoUps = coloreStato2};     
       if(ups[i].stato == 1) {countGiallo++; coloreTestoUps = coloreStato1};
       if(ups[i].stato != 1 && ups[i].stato != 2) {coloreTestoUps = '#424242'};
@@ -146,7 +146,7 @@
     let coloreMarker = coloreStatoDefault;
     
     if(countRosso > 0) { coloreMarker = coloreStato2 }
-    if(countGiallo > 0 && countGiallo > countRosso) { coloreMarker = coloreStato1 }
+    if(countGiallo > 0 && countRosso == 0) { coloreMarker = coloreStato1 }
 
     const markerHtmlStyles = `
       background-color: ${coloreMarker};

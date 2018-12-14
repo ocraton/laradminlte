@@ -78,7 +78,32 @@
                                 id="citta" placeholder="citta" value="{{ old('citta') }}"
                                 maxlength="200" required >
                             </div>
-                        </div>                                
+                        </div>                                 
+                    </div>
+                    <div class="row">                        
+                        <div class="form-group col-sm-12">
+                            <p><button type="button" 
+                            class="btn btn-sm btn-info" id="getCoordinates">
+                            Ottieni coordinate</button>
+                            <div id="messageResponseLonLat"></div>
+                            <p>                            
+                        </div>
+                    </div>
+                    <div class="row">                        
+                        <div class="form-group col-sm-3">
+                            <div class="form-group">                                
+                                <input type="lat" name="lat" class="form-control" 
+                                id="lat" placeholder="lat" value="{{ old('lat') }}"
+                                maxlength="200" required readonly>
+                            </div>
+                        </div>
+                        <div class="form-group col-sm-3">
+                            <div class="form-group">                                
+                                <input type="lon" name="lon" class="form-control" 
+                                id="lon" placeholder="lon" value="{{ old('lon') }}"
+                                maxlength="200" required readonly>
+                            </div>
+                        </div>                        
                     </div>
                 </div>
                 <!-- /.card-body -->
@@ -95,6 +120,44 @@
 @section('scripts')
 <script>
 $( document ).ready(function() {    
+
+    $('#getCoordinates').on('click', function(e){ 
+        addr =  $("#regione option:selected").val()+', '+ $("#provincia option:selected").val()+', '+ $("input[name=citta]").val()+', '+ $("input[name=indirizzo]").val();                                                                                      
+        addr_search(addr)
+    })
+
+    function addr_search(addr)
+    {                
+        var xmlhttp = new XMLHttpRequest();
+        var url = "https://nominatim.openstreetmap.org/search?format=json&limit=3&q=" + addr;
+        xmlhttp.onreadystatechange = function()
+        {
+        if (this.readyState == 4 && this.status == 200)
+        {
+            var myArr = JSON.parse(this.responseText);
+            setLatLongText(myArr);
+        }
+        };
+        xmlhttp.open("GET", url, true);
+        xmlhttp.send();
+    }
+
+    function setLatLongText(arr)
+    {
+        if(arr.length > 0)
+        {            
+            $("input[name=lat]").val(arr[0].lat)
+            $("input[name=lon]").val(arr[0].lon)            
+            $('div#messageResponseLonLat').empty();
+        }
+        else
+        {
+            $("input[name=lat]").val('')
+            $("input[name=lon]").val('')   
+            $('div#messageResponseLonLat').html('<span style="color:red">Nessun risultato...riprova.</span>');
+        }
+
+    }
 
     $('#btnSubmit').on('click', function(e){
 

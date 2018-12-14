@@ -74,6 +74,8 @@
                             </div>
                         </div>                                
                     </div>
+                    <input type="hidden" name="lat" id="lat" value="{{ $locazioni->lat }}">
+                    <input type="hidden" name="lon" id="lon" value="{{ $locazioni->lon }}">
                     <button type="button" class="btn btn-success" id="btnSubmit">Salva</button>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Chiudi</button>
                 </div>

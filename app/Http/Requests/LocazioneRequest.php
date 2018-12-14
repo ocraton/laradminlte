@@ -27,7 +27,9 @@ class LocazioneRequest extends FormRequest
          
         $rules = [
             'indirizzo' => 'required|max:255',
-            'citta' => 'required|max:255'
+            'citta' => 'required|max:255',
+            'lat' => 'required',
+            'lon' => 'required'
         ];
 
 
