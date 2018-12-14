@@ -20,7 +20,7 @@ class LocazioniController extends Controller
      */
     public function index()
     {        
-        $role = Auth::user()->getRoleNames();        
+        $role = Auth::user()->getRoleNames();               
         if($role[0] == 'cliente') {
             $locazioni = Locazione::where('user_id', Auth::id())->latest()->paginate(10);
         } else {
@@ -37,7 +37,7 @@ class LocazioniController extends Controller
             {
                 return $query->where('user_id', Auth::id())->with('user');
             });            
-        } else {
+        } else {            
             return Laratables::recordsOf(Locazione::class, function($query)
             {
                 return $query->with('user');

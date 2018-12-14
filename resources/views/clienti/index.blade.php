@@ -166,7 +166,7 @@ $( document ).ready(function() {
         csrf_token = $('meta[name="csrf-token"]').attr('content');
         swal({
             title: 'Cancellare: ' + title + ' ?',
-            text: 'Non potrai più recuperare i suoi dati!',
+            text: 'Non potrai più recuperare le sue locazioni e gli ups associati!',
             icon: "warning",
             buttons: true,
             dangerMode: true,

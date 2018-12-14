@@ -167,7 +167,7 @@ $( document ).ready(function() {
         csrf_token = $('meta[name="csrf-token"]').attr('content');
         swal({
             title: 'Cancellare locazione con id: ' + title + ' ?',
-            text: 'Non potrai più recuperare i suoi dati!',
+            text: 'Non potrai più recuperare i suoi dati e gli ups associati!',
             icon: "warning",
             buttons: true,
             dangerMode: true,
