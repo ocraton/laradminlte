@@ -57,7 +57,7 @@
                             <br>
                             {{ $upsitem->numero_serie }}
                             <br>
-                            <a href="">visualizza</a>
+                            <a href="http://{{ $upsitem->ip_address }}">vai</a>
                           </p>
                           <p style="font-size: 0.8rem">
                             Locazione <br>
@@ -111,9 +111,10 @@
 
 	var itemPlace = [
     @foreach($locazioni as $locazione)
-      [ {{ $locazione->lat }}, {{ $locazione->lon }} , '{{ $locazione->id }}', [
+      [ {{ $locazione->lat }}, {{ $locazione->lon }} , '{{ $locazione->id }}', [       
       @foreach($locazione->ups as $ups)
-        '{{ $ups }}',
+        {"id": "{{ $ups->id }}", "numero_serie": "{{ $ups->numero_serie }}", 
+        "stato": "{{ $ups->stato }}", "ip_address": "{{ $ups->ip_address }}" }, 
       @endforeach  
       ]],
     @endforeach
@@ -123,19 +124,29 @@
     add_marker(itemPlace[i][0], itemPlace[i][1], itemPlace[i][2], itemPlace[i][3])
 	}
 
-  function add_marker(lat, long, nome, ups) {
-
-
-    console.log(ups);
-
+  function add_marker(lat, long, locazioneId, ups) {
 
     const coloreStatoDefault = '#4cace8'
     const coloreStato0 = '#75d35b'
     const coloreStato1 = '#e5d64b'
     const coloreStato2 = '#e54b4b'
 
+    upsHtml = '';
+    let countRosso = countGiallo = 0;
+    for(let i=0;i<ups.length;i++){            
+      if(ups[i].stato == 2) {countRosso++; coloreTestoUps = coloreStato2};     
+      if(ups[i].stato == 1) {countGiallo++; coloreTestoUps = coloreStato1};
+      if(ups[i].stato != 1 && ups[i].stato != 2) {coloreTestoUps = '#424242'};
+      upsHtml += '<span style="color:'+coloreTestoUps+'">Numero Serie: '+ups[i].numero_serie+' stato: '+ups[i].stato+'<br><a href="http://'+ups[i].ip_address+'" target="_blank">vai</a></span> <hr>';
+    }
+
+    let coloreMarker = coloreStatoDefault;
+    
+    if(countRosso > 0) { coloreMarker = coloreStato2 }
+    if(countGiallo > 0 && countGiallo > countRosso) { coloreMarker = coloreStato1 }
+
     const markerHtmlStyles = `
-      background-color: ${coloreStatoDefault};
+      background-color: ${coloreMarker};
       width: 1.5rem;
       height: 1.5rem;
       display: block;
@@ -157,8 +168,8 @@
     var point = [lat, long];
     // add marker
     var marker = L.marker(point, {icon: cIcon}).addTo(map);
-    // add popup
-    marker.bindPopup('<p><b>'+nome+'</b><br>'+ups+'<br><a href="">modifica</a></p>');
+    // add popup        
+    marker.bindPopup('<p><b>'+locazioneId+'</b><br><br>'+upsHtml+'</p>');
   }
 
 </script>
