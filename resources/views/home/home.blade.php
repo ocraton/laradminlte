@@ -33,7 +33,7 @@
           </div>
           <!-- /.col-md-6 -->
           <div class="col-lg-4">
-            <div class="card card-danger card-outline">
+            <div class="card @if(count($ups) > 0) card-danger @else card-success @endif card-outline">
               <div class="card-header">
                 <h5 class="m-0">Ups</h5>
               </div>
