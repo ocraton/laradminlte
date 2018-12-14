@@ -13,7 +13,7 @@
 @endsection
 
 @section('titlepage')
-    Starter Page
+    Dashboard
 @endsection
 
 @section('content')
@@ -111,7 +111,7 @@
 
 	var itemPlace = [
     @foreach($locazioni as $locazione)
-      [ {{ $locazione->lat }}, {{ $locazione->lon }} , '{{ $locazione->id }}', [       
+      [ {{ $locazione->lat }}, {{ $locazione->lon }} , '{{ $locazione->user->ragione_sociale }}', '{{ $locazione->id }}', '{{ $locazione->citta }}, {{ preg_replace( "/\r|\n/", " ", $locazione->indirizzo ) }}', [       
       @foreach($locazione->ups as $ups)
         {"id": "{{ $ups->id }}", "numero_serie": "{{ $ups->numero_serie }}", 
         "stato": "{{ $ups->stato }}", "ip_address": "{{ $ups->ip_address }}" }, 
@@ -121,12 +121,12 @@
   ];
   
   for (let i = 0; i < itemPlace.length; i++) {
-    add_marker(itemPlace[i][0], itemPlace[i][1], itemPlace[i][2], itemPlace[i][3])
+    add_marker(itemPlace[i][0], itemPlace[i][1], itemPlace[i][2], itemPlace[i][3], itemPlace[i][4], itemPlace[i][5])
 	}
 
-  function add_marker(lat, long, locazioneId, ups) {
+  function add_marker(lat, long, cliente, locazioneId, indirizzo, ups) {
 
-    const coloreStatoDefault = '#4cace8'
+    const coloreStatoDefault = '#75d35b'
     const coloreStato0 = '#75d35b'
     const coloreStato1 = '#e5d64b'
     const coloreStato2 = '#e54b4b'
@@ -169,7 +169,7 @@
     // add marker
     var marker = L.marker(point, {icon: cIcon}).addTo(map);
     // add popup        
-    marker.bindPopup('<p><b>'+locazioneId+'</b><br><br>'+upsHtml+'</p>');
+    marker.bindPopup('<p><b><span style="font-size: 1rem">'+cliente+'</span> <br> id:'+locazioneId+' - '+indirizzo+'</b><br><br>'+upsHtml+'</p>');
   }
 
 </script>
