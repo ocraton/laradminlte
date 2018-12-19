@@ -47,6 +47,9 @@
               ; border-radius: 50%; display: inline-block;"></span>
             </span>     
         </li>
+        <li class="nav-item">
+            <span class="nav-link"><a href="http://{{ $ups->ip_address }}" target="_blank"><b>vai</b></a> </span>     
+        </li>
       </ul>
       </div>
       @endforeach
