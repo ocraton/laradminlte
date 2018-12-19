@@ -357,13 +357,13 @@ CREATE TABLE IF NOT EXISTS `locazioni` (
   UNIQUE KEY `items_id_unique` (`id`),
   KEY `user_id_foreign` (`user_id`),
   CONSTRAINT `user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=307 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=308 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Dump dei dati della tabella upsproject.locazioni: ~297 rows (circa)
 DELETE FROM `locazioni`;
 /*!40000 ALTER TABLE `locazioni` DISABLE KEYS */;
 INSERT INTO `locazioni` (`id`, `user_id`, `regione`, `indirizzo`, `citta`, `provincia`, `lat`, `lon`, `created_at`, `updated_at`) VALUES
-	(1, 1, 'Aylin', '843 Muller Fields\nLake Taurean, AL 89289', 'El Salvador', 'East Daryl', 43.5872565, 11.4249263, '2018-11-19 14:46:20', '2018-11-19 14:46:20'),
+	(1, 1, 'Aylin', '843 Muller Fields Lake Taurean, AL 89289', 'El Salvador', 'East Daryl', 43.5872565, 11.4249263, '2018-11-19 14:46:20', '2018-11-19 14:46:20'),
 	(2, 1, 'Earl', '85021 Alfred Falls Apt. 588\nBerryfurt, TX 01177', 'Congo', 'Gerlachtown', 41.7844321, 11.1314736, '2018-11-19 14:46:20', '2018-11-19 14:46:20'),
 	(3, 1, 'Alfonzo', '864 Lillie Lake\nLake Kaitlinstad, TN 92100-9739', 'Samoa', 'Camronbury', 43.7048475, 16.2466878, '2018-11-19 14:46:20', '2018-11-19 14:46:20'),
 	(4, 1, 'Athena', '8513 Darian Forks Suite 051\nRosalialand, NH 79601', 'China', 'Lake Selinabury', 43.4427332, 14.6096575, '2018-11-19 14:46:20', '2018-11-19 14:46:20'),
@@ -649,7 +649,8 @@ INSERT INTO `locazioni` (`id`, `user_id`, `regione`, `indirizzo`, `citta`, `prov
 	(287, 14, 'Sylvester', '9244 Walsh Curve\nPalmachester, CA 53640-9783', 'Ecuador', 'Handfurt', 42.0003143, 12.8456827, '2018-11-19 14:46:20', '2018-11-19 14:46:20'),
 	(288, 14, 'Marvin', '13021 Trisha Via\nHunterhaven, KS 32017-3412', 'Yemen', 'Wildermanfurt', 40.8052815, 13.7663171, '2018-11-19 14:46:20', '2018-11-19 14:46:20'),
 	(289, 14, 'Elliot', '583 Hauck Plains\nLake Dariobury, MS 68504-0985', 'Bangladesh', 'O\'Konview', 43.5700819, 13.9212521, '2018-11-19 14:46:20', '2018-11-19 14:46:20'),
-	(306, 14, 'Calabria', 'via roma 76', 'Varese', 'Matera', 41.5700819, 12.9212521, '2018-12-11 15:55:11', '2018-12-11 16:26:36');
+	(306, 14, 'Calabria', 'via roma 76', 'Varese', 'Matera', 41.5700819, 12.9212521, '2018-12-11 15:55:11', '2018-12-11 16:26:36'),
+	(307, 14, 'Abruzzo', 'viale europa 1', 'nereto', 'Teramo', 42.8144127, 13.8181936, '2018-12-14 16:48:37', '2018-12-14 16:48:37');
 /*!40000 ALTER TABLE `locazioni` ENABLE KEYS */;
 
 -- Dump della struttura di tabella upsproject.migrations
@@ -792,9 +793,9 @@ CREATE TABLE IF NOT EXISTS `ups` (
   UNIQUE KEY `items_id_unique` (`id`),
   KEY `locazione_id_foreign` (`locazione_id`),
   CONSTRAINT `locazione_id_foreign` FOREIGN KEY (`locazione_id`) REFERENCES `locazioni` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=311 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=313 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
--- Dump dei dati della tabella upsproject.ups: ~7 rows (circa)
+-- Dump dei dati della tabella upsproject.ups: ~297 rows (circa)
 DELETE FROM `ups`;
 /*!40000 ALTER TABLE `ups` DISABLE KEYS */;
 INSERT INTO `ups` (`id`, `locazione_id`, `numero_serie`, `stato`, `ip_address`, `created_at`, `updated_at`) VALUES
@@ -1087,7 +1088,9 @@ INSERT INTO `ups` (`id`, `locazione_id`, `numero_serie`, `stato`, `ip_address`, 
 	(306, 227, '78945631', 1, '225.165.161.51', '2018-12-12 15:02:33', '2018-12-12 15:02:33'),
 	(307, 177, '234242342342342', 1, '234.234.234.234', '2018-12-12 16:43:25', '2018-12-12 16:43:25'),
 	(308, 177, 'asfd56sd654sd65', 0, '54.64.65.45', '2018-12-13 08:17:18', '2018-12-13 08:17:18'),
-	(309, 177, '2342423423', -1, '34.214.234.123', '2018-12-13 08:48:10', '2018-12-13 08:54:54');
+	(309, 177, '2342423423', -1, '34.214.234.123', '2018-12-13 08:48:10', '2018-12-13 08:54:54'),
+	(311, 245, '23424234dfgsdb', 2, '32.131.213.52', '2018-12-14 13:32:59', '2018-12-14 13:33:13'),
+	(312, 307, '234f54f5535345f', 1, '239.48.57.32', '2018-12-14 16:49:06', '2018-12-14 16:50:47');
 /*!40000 ALTER TABLE `ups` ENABLE KEYS */;
 
 -- Dump della struttura di tabella upsproject.users
@@ -1109,15 +1112,15 @@ CREATE TABLE IF NOT EXISTS `users` (
 DELETE FROM `users`;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
 INSERT INTO `users` (`id`, `username`, `email`, `ragione_sociale`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
-	(1, 'admin', 'admin@email.com', 'admin', NULL, '$2y$10$mwtBAVaE3kSJ44H73Zt54u9SsjmJT8HCUEci0HUcMRauN3CNegF5u', 'G5BhdciXuWAK9OH3oPOjWkw2oJhysvu0OS6ZIYHETRuHocDa7861JN1x0z3M', '2018-11-12 16:10:46', '2018-11-12 16:10:46'),
+	(1, 'admin', 'admin@email.com', 'admin', NULL, '$2y$10$mwtBAVaE3kSJ44H73Zt54u9SsjmJT8HCUEci0HUcMRauN3CNegF5u', 'zX0SaLlvfzbqdPIWyeWwb3lx9e4HD9RD94Y6GqK5bz2XbDFaUBaK9FMyhXZt', '2018-11-12 16:10:46', '2018-11-12 16:10:46'),
 	(4, 'cliente1', 'cliente1@email.com', 'cliente 1 srl', NULL, '$2y$10$mwtBAVaE3kSJ44H73Zt54u9SsjmJT8HCUEci0HUcMRauN3CNegF5u', 'OQdaqA8ZFVENf1XDhZSRTGPmpUa1AcVOC0fi9LOI1XSSeWyYbGNg8LpvyVWW', '2018-11-12 16:10:46', '2018-11-12 16:10:46'),
 	(5, 'cliente2', NULL, 'cliente 2 snc', NULL, '$2y$10$GpqmTqudkS.o.uFaLpmCL.yYhkvM13/zpnGTDtkJqNdVSXgRAPrjS', NULL, '2018-12-10 15:41:12', '2018-12-10 15:41:12'),
 	(6, 'cliente3', NULL, 'cliente 3 spa', NULL, '$2y$10$DSReH0DWI6g/eCKsWq03rOnqk.NW4VT0Inr/ciHZDYGVKVFBxSeWK', NULL, '2018-12-10 15:56:29', '2018-12-10 15:56:29'),
-	(7, 'cliente4', NULL, 'cliente 4 srl', NULL, '$2y$10$rxuTJEU.IaiETUeaalRSCOEO92BrnTNqvb9RchtCfyrRl4qVp.hf2', NULL, '2018-12-10 16:31:04', '2018-12-10 16:31:04'),
+	(7, 'cliente4', NULL, 'cliente 4 srl', NULL, '$2y$10$rxuTJEU.IaiETUeaalRSCOEO92BrnTNqvb9RchtCfyrRl4qVp.hf2', 'jCB4wKBLQSx6hCXfS3IdD9jYyXzLAE7rKfYBiBHgp9ktsSavOQnVRYtwKEKK', '2018-12-10 16:31:04', '2018-12-10 16:31:04'),
 	(9, 'cliente6', NULL, 'cliente sei ltd', NULL, '$2y$10$W0hVcIYqZUIg0DYeGhQSeu.K2GMz9mEAvYip3Y02coMzG7VaGAkSS', NULL, '2018-12-10 16:44:45', '2018-12-10 16:44:45'),
 	(13, 'cliente123123', NULL, 'ragione cliente 12313213', NULL, '$2y$10$borMzPHdGmeHGjm6MuQGCuDt1cNQL8fqnMxtn83ko4zZl7edeoxKa', NULL, '2018-12-10 17:01:07', '2018-12-10 17:01:07'),
 	(14, 'nunuxebary', NULL, 'Ullamco accusamus S.R.L.', NULL, '$2y$10$FDUmmkVagn3x0TT9GQTVDuuJNAzvpujXtCAWbHQ/WJAgdiNVy38Xa', NULL, '2018-12-11 09:14:42', '2018-12-11 10:56:28'),
-	(25, 'operatore', 'operatore@email.com', 'operatore', NULL, '$2y$10$mwtBAVaE3kSJ44H73Zt54u9SsjmJT8HCUEci0HUcMRauN3CNegF5u', 'p1RXadcduyYIAIR4X8uMwRYpZAArBFBRAk83CZPhoes3x603M8pIXWSu6Pd4', '2018-11-12 16:10:46', '2018-11-12 16:10:46');
+	(25, 'operatore', 'operatore@email.com', 'operatore', NULL, '$2y$10$mwtBAVaE3kSJ44H73Zt54u9SsjmJT8HCUEci0HUcMRauN3CNegF5u', 'n5c5SMT2NByQxFswgWWwKGpDlim5ut6Q5oqxvGh0hI03d62YpK7Zm1S5O5yz', '2018-11-12 16:10:46', '2018-11-12 16:10:46');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;

@@ -69,7 +69,7 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                {{ config('app.name', 'UpsManager') }}
+                {{ APPNAME }}
                 </div>
 
                 <div class="links">
