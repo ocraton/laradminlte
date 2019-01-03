@@ -63,9 +63,7 @@
             {{ __('Hai dimenticato la tua Password?') }}
         </a>
       </p>
-      <p class="mb-0">
-      <a  href="{{ route('register') }}">{{ __('Registra un nuovo membro') }}</a>
-      </p> -->
+       -->
     </div>
     <!-- /.login-card-body -->
   </div>

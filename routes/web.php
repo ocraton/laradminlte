@@ -15,10 +15,21 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Auth::routes();
+// Authentication Routes...
+Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
+Route::post('login', 'Auth\LoginController@login');
+Route::post('logout', 'Auth\LoginController@logout')->name('logout');
+// Password Reset Routes...
+Route::get('password/reset', 'Auth\ForgotPasswordController@showLinkRequestForm')->name('password.request');
+Route::post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail')->name('password.email');
+Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.reset');
+Route::post('password/reset', 'Auth\ResetPasswordController@reset')->name('password.update');
+// Email Verification Routes...
+Route::get('email/verify', 'Auth\VerificationController@show')->name('verification.notice');
+Route::get('email/verify/{id}', 'Auth\VerificationController@verify')->name('verification.verify');
+Route::get('email/resend', 'Auth\VerificationController@resend')->name('verification.resend');
 
 Route::get('/home', 'HomeController@index')->name('home');
-
 
 Route::resource('items','ItemsController')->middleware(['auth','role:operator|admin']);
 Route::get('/itemdatatable', 'ItemsController@getItemList')->name('itemdatatable')
@@ -28,7 +39,6 @@ Route::resource('clienti', 'ClientiController')->middleware(['auth','role:admin'
 Route::get('/clientidatatable', 'ClientiController@getClientiList')->name('clientidatatable')
         ->middleware(['auth','role:admin']);
       
-
 Route::get('locazioni', 'LocazioniController@index')->name('locazioni.index')->middleware(['auth','role:cliente|operator|admin']);     
 Route::post('locazioni', 'LocazioniController@store')->name('locazioni.store')->middleware(['auth','role:admin']);
 Route::get('locazioni/create', 'LocazioniController@create')->name('locazioni.create')->middleware(['auth','role:admin']);
@@ -38,7 +48,6 @@ Route::delete('locazioni/{locazioni}', 'LocazioniController@destroy')->name('loc
 Route::get('locazioni/{locazioni}/edit', 'LocazioniController@edit')->name('locazioni.edit')->middleware(['auth','role:admin']);
 Route::get('/locazionidatatable', 'LocazioniController@getLocazioniList')->name('locazionidatatable')
         ->middleware(['auth','role:cliente|operator|admin']);         
-
 
 Route::get('ups', 'UpsController@index')->name('ups.index')->middleware(['auth','role:operator|admin']);     
 Route::post('ups', 'UpsController@store')->name('ups.store')->middleware(['auth','role:admin']);
