@@ -18,7 +18,6 @@
 
 @section('content')
 
-
         <div class="row">
           <div class="col-lg-8">
           <div class="card card-primary card-outline">
@@ -60,7 +59,7 @@
                             <br>
                             {{ $upsitem->numero_serie }}
                             <br>
-                            <a href="http://{{ $upsitem->ip_address }}">vai</a>
+                            <a href="http://{{ $upsitem->ip_address }}" target="_blank">vai</a>
                           </p>
                           <p style="font-size: 0.8rem">
                             Locazione <br>
@@ -174,6 +173,18 @@
     // add popup        
     marker.bindPopup('<p><b><span style="font-size: 1rem">'+cliente+'</span> <br> id:'+locazioneId+' - '+indirizzo+'</b><br><br>'+upsHtml+'</p>');
   }
+
+
+  window.Echo.channel('upsstatus.{{ Auth::id() }}')
+    .listen('UpsStatusUpdated', (e) => {
+        console.log(e);
+        refreshAfterUpsStatusChgange();
+    });
+
+    function refreshAfterUpsStatusChgange() {
+      location.reload(true);
+    }
+    
 
 </script>
 @endsection

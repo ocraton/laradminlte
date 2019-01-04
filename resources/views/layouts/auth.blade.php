@@ -7,7 +7,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-  <title>{{ APPNAME }}</title>
+  <title>{{ config('app.name', 'UpsManager') }}</title>
 
     <link rel="stylesheet" href="css/app.css">
     
@@ -15,19 +15,11 @@
 <body class="hold-transition login-page">
 <div class="login-box">
   <div class="login-logo">
-    <a href="/"><b>{{ APPNAME }}</b></a>
+    <a href="/"><b>{{ config('app.name', 'UpsManager') }}</b></a>
   </div>
   @yield('content')
   
 <script src="js/app.js"></script>
-<script>
-  $(function () {
-    $('input').iCheck({
-      checkboxClass: 'icheckbox_square-blue',
-      radioClass   : 'iradio_square-blue',
-      increaseArea : '20%' // optional
-    })
-  })
-</script>
+
 </body>
 </html>

@@ -11,6 +11,14 @@
 |
 */
 
+Route::get('refresh-map', function() {            
+        $ups = \App\Ups::find(37);        
+        $ups->stato = 2;
+        $ups->save();
+        broadcast(new \App\Events\UpsStatusUpdated($ups));        
+    });
+
+
 Route::get('/', function () {
     return view('welcome');
 });

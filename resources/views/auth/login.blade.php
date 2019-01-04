@@ -38,7 +38,7 @@
         </div>
 <!--         <div class="row">
           <div class="col-8">
-            <div class="checkbox icheck">
+            <div class="checkbox">
             <div class="form-check">
               <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
 
