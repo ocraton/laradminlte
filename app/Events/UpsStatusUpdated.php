@@ -35,7 +35,7 @@ class UpsStatusUpdated implements ShouldBroadcast
      */
     public function broadcastOn()
     {
-        return new Channel('upsstatus.' . Auth::id());
+        return new Channel('upsstatus');
     }
 
     public function broadcastWith()

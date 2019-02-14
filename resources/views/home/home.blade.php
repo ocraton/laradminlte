@@ -175,7 +175,7 @@
   }
 
 
-  window.Echo.channel('upsstatus.{{ Auth::id() }}')
+  window.Echo.channel('upsstatus')
     .listen('UpsStatusUpdated', (e) => {
         console.log(e);
         refreshAfterUpsStatusChgange();
