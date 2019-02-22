@@ -14,6 +14,7 @@ try {
     require('bootstrap');
     require('admin-lte');
     require('inputmask/dist/jquery.inputmask.bundle.js');
+    require('bootstrap-select');
     require('sweetalert');
     require('datatables.net-bs4');
     

@@ -21,6 +21,7 @@
     "dependencies": {
         "@fortawesome/fontawesome-free": "^5.5.0",
         "admin-lte": "^3.0.0-alpha.2",
+        "bootstrap-select": "^1.13.5",
         "datatables.net": "^1.10.19",
         "datatables.net-dt": "^1.10.19",
         "inputmask": "^4.0.4",

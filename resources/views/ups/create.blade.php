@@ -22,9 +22,9 @@
                     <div class="row">
                         <div class="form-group col-sm-12">
                                 <label for="locazione">Locazione</label>
-                                <select class="form-control" name="locazione" id="locazione">
+                                <select class="form-control selectpicker" name="locazione" id="locazione" data-live-search="true">                                
                                     @foreach($locazioni as $locazione)
-                                            <option value="{{ $locazione->id }}"
+                                            <option value="{{ $locazione->id }}" data-tokens="{{ $locazione->id }}, {{ $locazione->citta }} - {{ $locazione->indirizzo }} | Cliente: {{ $locazione->user->ragione_sociale }}"
                                             @if (old('locazione') == $locazione->id) {{ 'selected' }} @endif
                                             >
                                             {{ $locazione->id }}, {{ $locazione->citta }} - {{ $locazione->indirizzo }}

@@ -23,9 +23,9 @@
                         <div class="form-group col-md-6">
                             <div class="form-group">
                                 <label for="cliente">Cliente</label>
-                                <select class="form-control" name="cliente" id="cliente">
+                                <select class="form-control selectpicker" name="cliente" id="cliente" data-live-search="true">
                                     @foreach($clienti as $cliente)
-                                            <option value="{{ $cliente->id }}"
+                                            <option value="{{ $cliente->id }}" data-tokens="{{ $cliente->ragione_sociale }}"
                                             @if (old('cliente') == $cliente->id) {{ 'selected' }} @endif
                                             >
                                             {{ $cliente->ragione_sociale }}
