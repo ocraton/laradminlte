@@ -34,6 +34,7 @@ Ups
                     <th>Locazione</th>                 
                     <th>Numero di Serie</th>
                     <th>IP</th>
+                    <th>Modello</th>
                     <th>Stato</th>
                     <th>Azioni</th>
                   </tr>
@@ -86,6 +87,7 @@ $( document ).ready(function() {
             { name: 'locazione.citta', orderable: false },            
             { name: 'numero_serie' },            
             { name: 'ip_address' },
+            { name: 'modello' },
             { name: 'stato' },
             { name: 'action', orderable: false, searchable: false }
             
@@ -132,6 +134,7 @@ $( document ).ready(function() {
                     locazione: $("#upsModal select#locazione option:selected").val(),                    
                     numero_serie: $("#upsModal input[name=numero_serie]").val(),
                     ip_address: $("#upsModal input[name=ip_address]").val(),
+                    modello: $("#upsModal input[name=modello]").val(),
                     stato: $("#upsModal input[name=stato]:checked").val()
                 }
                 $.ajax({

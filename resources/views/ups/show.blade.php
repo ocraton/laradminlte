@@ -21,8 +21,14 @@
       </li>
 
     </ul>
-  </div>
+  </div>  
 </div>
+<br>
+<div class="card-body table-responsive p-0">
+    <table class="table table-hover">
+        {!! html_entity_decode($ups->alarm_detail) !!}
+    </table>  
+</div>  
 
 </div>
 <div class="modal-footer">

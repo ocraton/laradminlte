@@ -56,6 +56,7 @@ class UpsController extends Controller
             $ups->locazione_id = $request->locazione;            
             $ups->numero_serie = $request->numero_serie;            
             $ups->ip_address = $request->ip_address;  
+            $ups->modello = $request->modello;
             $ups->stato = $request->stato;                                             
             $ups->save();
 
@@ -117,7 +118,8 @@ class UpsController extends Controller
             $ups = Ups::find($request->segment(2));
             $ups->locazione_id = $request->locazione;            
             $ups->numero_serie = $request->numero_serie;            
-            $ups->ip_address = $request->ip_address;            
+            $ups->ip_address = $request->ip_address;
+            $ups->modello = $request->modello;            
             $ups->stato = ($request->stato == '') ? -1 : $request->stato;                        
             $ups->save();
             

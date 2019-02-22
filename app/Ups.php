@@ -11,7 +11,9 @@ class Ups extends Model
     protected $fillable = [
         'numero_serie',        
         'stato',
-        'ip_address'        
+        'ip_address',
+        'modello',
+        'alarm_detail'        
     ];
   
     public function locazione()

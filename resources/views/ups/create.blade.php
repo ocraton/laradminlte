@@ -51,13 +51,21 @@
                                 id="ip_address" placeholder="Indirizzo IP" value="{{ old('ip_address') }}"
                                 maxlength="20" required >
                             </div>
-                        </div>                                
+                        </div>
+                        <div class="form-group col-sm-6">
+                            <div class="form-group">
+                                <label for="modello">Modello</label>
+                                <input type="text" name="modello" class="form-control" 
+                                id="modello" placeholder="Modello" value="{{ old('modello') }}"
+                                maxlength="50" >
+                            </div>
+                        </div>                                 
                     </div>
                     <div class="row">    
                         <div class="form-group col-sm-6">
                         <div class="alert alert-info">                  
                   
-                  <p class="info"><i class="icon fa fa-info"></i> Verrà inizializzato con uno stato di default</p>   
+                  <p class="info"><i class="icon fa fa-info"></i> Verrà inizializzato con lo stato di default</p>   
                     <input type="hidden" name="stato" id="stato" value="-1">
                 </div>
                                                              

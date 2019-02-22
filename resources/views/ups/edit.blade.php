@@ -45,7 +45,15 @@
                                 id="ip_address" placeholder="Indirizzo IP" value="{{ $ups->ip_address }}"
                                 maxlength="20" required >
                             </div>
-                        </div>                                
+                        </div>
+                        <div class="form-group col-sm-6">
+                            <div class="form-group">
+                                <label for="modello">Modello</label>
+                                <input type="text" name="modello" class="form-control" 
+                                id="modello" placeholder="Modello" value="{{ $ups->modello }}"
+                                maxlength="50" >
+                            </div>
+                        </div>                                                         
                     </div>
                     <div class="row">    
                         <div class="form-group col-sm-6">
