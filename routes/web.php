@@ -11,13 +11,13 @@
 |
 */
 
-Route::get('refresh-map', function() {            
+/* Route::get('refresh-map', function() {            
         $ups = \App\Ups::find(37);        
-        $ups->stato = 2;
+        $ups->stato = 1;
         $ups->save();
-        broadcast(new \App\Events\UpsStatusUpdated($ups));        
-    });
-
+        broadcast(new \App\Events\UpsStatusUpdated($ups));
+});
+ */
 
 Route::get('/', function () {
     return view('welcome');
@@ -64,5 +64,6 @@ Route::get('ups/{ups}', 'UpsController@show')->name('ups.show')->middleware(['au
 Route::put('ups/{ups}', 'UpsController@update')->name('ups.update')->middleware(['auth','role:admin']);
 Route::delete('ups/{ups}', 'UpsController@destroy')->name('ups.destroy')->middleware(['auth','role:admin']);
 Route::get('ups/{ups}/edit', 'UpsController@edit')->name('ups.edit')->middleware(['auth','role:admin']);
+Route::get('ups/refreshmap/{id}/{stato}/{keyp}', 'UpsController@refreshmap')->name('ups.refreshmap');
 Route::get('/upsdatatable', 'UpsController@getUpsList')->name('upsdatatable')
         ->middleware(['auth','role:operator|admin']);        

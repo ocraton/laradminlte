@@ -7,6 +7,7 @@ use Carbon;
 use App\Ups;
 use App\User;
 use App\Locazione;
+use Validator;
 use Auth;
 use Freshbitsweb\Laratables\Laratables;
 use App\Http\Requests\UpsRequest;
@@ -155,4 +156,32 @@ class UpsController extends Controller
 
         return redirect('ups');
     }
+
+    /**
+     * Refresh Map.
+     */
+    public function refreshmap($id, $stato, $keyp)
+    { 
+        $urlParam = [
+            'id' => $id,
+            'stato' => $stato,
+            'keyp' => $keyp
+        ];
+		$validator = Validator::make($urlParam, [
+            'id' => 'required|numeric',
+            'stato' => 'required|numeric',
+            'keyp' => 'required'
+        ]);
+
+		if ($validator->fails() && $keyp != '(K.e223ef£74H0') {
+				return -1;
+        }
+        
+        $ups = \App\Ups::find($id);        
+        $ups->stato = $stato;
+        $ups->save();
+        broadcast(new \App\Events\UpsStatusUpdated($ups));
+        return 'ok';
+    }
+
 }
