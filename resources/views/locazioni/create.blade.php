@@ -94,14 +94,14 @@
                             <div class="form-group">                                
                                 <input type="lat" name="lat" class="form-control" 
                                 id="lat" placeholder="lat" value="{{ old('lat') }}"
-                                maxlength="200" required readonly>
+                                maxlength="200" required>
                             </div>
                         </div>
                         <div class="form-group col-sm-3">
                             <div class="form-group">                                
                                 <input type="lon" name="lon" class="form-control" 
                                 id="lon" placeholder="lon" value="{{ old('lon') }}"
-                                maxlength="200" required readonly>
+                                maxlength="200" required >
                             </div>
                         </div>                        
                     </div>
