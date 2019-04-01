@@ -21,7 +21,7 @@ class UpsController extends Controller
      */
     public function index()
     {        
-        $locazioni = Ups::latest()->paginate(10);
+        $ups = Ups::latest()->paginate(10);
         return view('ups.index', compact('ups'));
     }
 
@@ -40,7 +40,7 @@ class UpsController extends Controller
      */
     public function create()
     {
-        $locazioni = $locazioni = Locazione::latest()->with('user')->get();
+        $locazioni = Locazione::latest()->with('user')->get();
         return view('ups.create', compact('ups', 'locazioni'));
     }
 
