@@ -113,17 +113,22 @@
 
 	var itemPlace = [
     @foreach($locazioni as $locazione)
-      [ {{ $locazione->lat }}, {{ $locazione->lon }} , '{{ $locazione->user->ragione_sociale }}', '{{ $locazione->id }}', '{{ $locazione->citta }}, {{ preg_replace( "/\r|\n/", " ", $locazione->indirizzo ) }}', [       
-      @foreach($locazione->ups as $ups)
-        {"id": "{{ $ups->id }}", "numero_serie": "{{ $ups->numero_serie }}", 
-        "stato": "{{ $ups->stato }}", "ip_address": "{{ $ups->ip_address }}" }, 
-      @endforeach  
-      ]],
+      [ {{ $locazione->lat }}, {{ $locazione->lon }} , '{{ $locazione->user->ragione_sociale }}', 
+      '{{ $locazione->id }}', '{{ $locazione->citta }}, {{ preg_replace( "/\r\n|\r|\n/", " ", $locazione->indirizzo ) }}', 
+        [       
+          @foreach($locazione->ups as $ups)
+            {'id': '{{ $ups->id }}', 'numero_serie': '{{ $ups->numero_serie }}', 
+            'stato': "{{ $ups->stato }}", 'ip_address': '{{ $ups->ip_address }}', 
+            'alarm_detail': '{!! preg_replace( "/\r\n|\r|\n/", " ", html_entity_decode($ups->alarm_detail)) !!}'  }, 
+          @endforeach  
+        ]
+      ],
     @endforeach
   ];
   
   for (let i = 0; i < itemPlace.length; i++) {
-    add_marker(itemPlace[i][0], itemPlace[i][1], itemPlace[i][2], itemPlace[i][3], itemPlace[i][4], itemPlace[i][5])
+    add_marker(itemPlace[i][0], itemPlace[i][1], itemPlace[i][2], itemPlace[i][3], 
+                itemPlace[i][4], itemPlace[i][5])
 	}
 
   function add_marker(lat, long, cliente, locazioneId, indirizzo, ups) {
@@ -139,7 +144,10 @@
       if(ups[i].stato == 2) {countRosso++; coloreTestoUps = coloreStato2};     
       if(ups[i].stato == 1) {countGiallo++; coloreTestoUps = coloreStato1};
       if(ups[i].stato != 1 && ups[i].stato != 2) {coloreTestoUps = '#424242'};
-      upsHtml += '<span style="color:'+coloreTestoUps+'">Numero Serie: '+ups[i].numero_serie+' stato: '+ups[i].stato+'<br><a href="http://'+ups[i].ip_address+'" target="_blank">vai</a></span> <hr>';
+      upsHtml += '<span style="color:'+coloreTestoUps+'">Numero Serie: '+
+      ups[i].numero_serie+' stato: '+ups[i].stato +
+      '<br><table style="width:100%">'+ups[i].alarm_detail+'</table>'+
+      '<br><a href="http://'+ups[i].ip_address+'" target="_blank">vai</a></span> <hr>';
     }
 
     let coloreMarker = coloreStatoDefault;

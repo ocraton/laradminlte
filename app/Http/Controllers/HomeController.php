@@ -42,7 +42,7 @@ class HomeController extends Controller
             
             default:
                 $ups = Ups::where('stato', 2)->orWhere('stato', 1)->with('locazione')->get();
-                $locazioni = Locazione::with('ups')->get();
+                $locazioni = Locazione::with('ups')->get();                
                 break;
         }
                 
