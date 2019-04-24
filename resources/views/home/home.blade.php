@@ -58,6 +58,11 @@
                             Numero di serie: 
                             <br>
                             {{ $upsitem->numero_serie }}
+                            @if($upsitem->alarm_detail != '')
+                            <table class="table">
+                            {!! preg_replace( "/\r\n|\r|\n/", " ", html_entity_decode($upsitem->alarm_detail)) !!}
+                            </table>                       
+                            @endif     
                             <br>
                             <a href="http://{{ $upsitem->ip_address }}" target="_blank">vai</a>
                           </p>
