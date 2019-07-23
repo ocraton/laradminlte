@@ -41,7 +41,7 @@ class UpsController extends Controller
     public function create()
     {
         $locazioni = Locazione::latest()->with('user')->get();
-        return view('ups.create', compact('ups', 'locazioni'));
+        return view('ups.create', compact('locazioni'));
     }
 
     /**

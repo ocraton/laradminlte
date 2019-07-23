@@ -41,7 +41,7 @@
                                 <input type="text" name="numero_serie"
                                  class="form-control" id="numero_serie" placeholder="Numero di serie" 
                                  value="{{ old('numero_serie') }}"
-                                maxlength="15" required >
+                                maxlength="100" required >
                             </div>
                         </div>
                         <div class="form-group col-sm-6">
@@ -49,7 +49,7 @@
                                 <label for="ip_address">Indirizzo IP</label>
                                 <input type="text" name="ip_address" class="form-control" 
                                 id="ip_address" placeholder="Indirizzo IP" value="{{ old('ip_address') }}"
-                                maxlength="20" required >
+                                maxlength="100" required >
                             </div>
                         </div>
                         <div class="form-group col-sm-6">
