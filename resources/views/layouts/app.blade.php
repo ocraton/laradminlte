@@ -9,7 +9,8 @@
 
   <title>{{ config('app.name', 'UpsManager') }}</title>
 
-    <link rel="stylesheet" href="css/app.css">
+  <link rel="stylesheet" href="{{ url('css/app.css') }}">
+  <link rel="stylesheet" href="{{ url('css/all.css') }}">
     
 </head>
 <body>

@@ -9,7 +9,9 @@
 
   <title>{{ config('app.name', 'UpsManager') }}</title>
 
-  <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+  <link rel="stylesheet" href="{{ url('css/app.css') }}">
+  <link rel="stylesheet" href="{{ url('css/all.css') }}">
+
   @yield('head')
 </head>
 <body class="hold-transition sidebar-mini">

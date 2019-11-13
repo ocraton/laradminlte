@@ -13,3 +13,9 @@ const mix = require('laravel-mix');
 
 mix.js('resources/js/app.js', 'public/js')
    .sass('resources/sass/app.scss', 'public/css');
+mix.styles([
+      'public/css/admin-lte/dist/css/adminlte.min.css',
+      'public/asset/fontawesome-free/css/fontawesome.min.css',
+      'public/asset/fontawesome-free/css/solid.min.css',
+      'public/asset/fontawesome-free/css/brands.min.css',            
+  ], 'public/css/all.css');

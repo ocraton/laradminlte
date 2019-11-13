@@ -10,24 +10,25 @@
         "production": "cross-env NODE_ENV=production node_modules/webpack/bin/webpack.js --no-progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js"
     },
     "devDependencies": {
-        "axios": "^0.18",
-        "bootstrap": "^4.0.0",
-        "cross-env": "^5.1",
-        "jquery": "^3.2",
+        "axios": "^0.18.1",
+        "bootstrap": "^4.3.1",
+        "cross-env": "^5.2.1",
+        "jquery": "^3.4.1",
         "laravel-mix": "^2.0",
-        "lodash": "^4.17.5",
-        "popper.js": "^1.12"
+        "lodash": "^4.17.15",
+        "popper.js": "^1.16.0"
     },
     "dependencies": {
-        "@fortawesome/fontawesome-free": "^5.5.0",
-        "admin-lte": "^3.0.0-alpha.2",
-        "bootstrap-select": "^1.13.5",
-        "datatables.net": "^1.10.19",
-        "datatables.net-dt": "^1.10.19",
-        "inputmask": "^4.0.4",
-        "laravel-echo": "^1.5.2",
-        "laravel-echo-server": "^1.5.0",
-        "socket.io-client": "^2.2.0",
+        "@fortawesome/fontawesome-free": "^5.11.2",
+        "admin-lte": "^3.0.0",
+        "bootstrap-select": "^1.13.12",
+        "datatables.net": "^1.10.20",
+        "datatables.net-dt": "^1.10.20",
+        "inputmask": "^4.0.9",
+        "laravel-echo": "^1.6.1",
+        "laravel-echo-server": "^1.5.9",
+        "node-sass": "^4.13.0",
+        "socket.io-client": "^2.3.0",
         "sweetalert": "^2.1.2"
     }
 }
