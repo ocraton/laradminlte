@@ -61,6 +61,7 @@ Route::get('ups', 'UpsController@index')->name('ups.index')->middleware(['auth',
 Route::post('ups', 'UpsController@store')->name('ups.store')->middleware(['auth','role:admin']);
 Route::get('ups/create', 'UpsController@create')->name('ups.create')->middleware(['auth','role:admin']);
 Route::get('ups/{ups}', 'UpsController@show')->name('ups.show')->middleware(['auth','role:operator|admin']);
+Route::get('ups/getinfo/{ups}', 'UpsController@getInfo')->name('ups.getinfo')->middleware(['auth','role:operator|admin']);
 Route::put('ups/{ups}', 'UpsController@update')->name('ups.update')->middleware(['auth','role:admin']);
 Route::delete('ups/{ups}', 'UpsController@destroy')->name('ups.destroy')->middleware(['auth','role:admin']);
 Route::get('ups/{ups}/edit', 'UpsController@edit')->name('ups.edit')->middleware(['auth','role:admin']);

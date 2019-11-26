@@ -20,12 +20,12 @@ class UpsController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {        
+    {
         $ups = Ups::latest()->paginate(10);
         return view('ups.index', compact('ups'));
     }
 
-    public function getUpsList() 
+    public function getUpsList()
     {
         return Laratables::recordsOf(Ups::class, function($query)
         {
@@ -54,14 +54,14 @@ class UpsController extends Controller
     {
         try {
 
-            $ups->locazione_id = $request->locazione;            
-            $ups->numero_serie = $request->numero_serie;            
-            $ups->ip_address = $request->ip_address;  
+            $ups->locazione_id = $request->locazione;
+            $ups->numero_serie = $request->numero_serie;
+            $ups->ip_address = $request->ip_address;
             $ups->modello = $request->modello;
-            $ups->stato = $request->stato;                                             
+            $ups->stato = $request->stato;
             $ups->save();
 
-            flash()->success('Ups creato!');          
+            flash()->success('Ups creato!');
 
         } catch (\Exception $e) {
 
@@ -69,7 +69,7 @@ class UpsController extends Controller
 
         }
 
-        return redirect('ups'); 
+        return redirect('ups');
     }
 
     /**
@@ -79,10 +79,26 @@ class UpsController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show(Request $request, Ups $ups)
-    {              
+    {
         if($request->ajax()) {
             $ups_view = view('ups.show', compact('ups'))->render();
-            return response()->json(['viewinfo' => $ups_view]); 
+            return response()->json(['viewinfo' => $ups_view]);
+        } else {
+            return redirect('ups');
+        }
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function getInfo(Request $request, Ups $ups)
+    {
+        if($request->ajax()) {
+            $ups_view = view('ups.getinfo', compact('ups'))->render();
+            return response()->json(['viewinfo' => $ups_view]);
         } else {
             return redirect('ups');
         }
@@ -96,10 +112,10 @@ class UpsController extends Controller
      */
     public function edit(Request $request, Ups $ups)
     {
-        $locazioni = Locazione::latest()->with('user')->get();        
+        $locazioni = Locazione::latest()->with('user')->get();
         if($request->ajax()) {
             $ups_view = view('ups.edit', compact('ups', 'locazioni'))->render();
-            return response()->json(['viewinfo' => $ups_view]); 
+            return response()->json(['viewinfo' => $ups_view]);
         } else {
             return redirect('locazioni');
         }
@@ -115,16 +131,16 @@ class UpsController extends Controller
     public function update(UpsRequest $request)
     {
         try {
-            
+
             $ups = Ups::find($request->segment(2));
-            $ups->locazione_id = $request->locazione;            
-            $ups->numero_serie = $request->numero_serie;            
+            $ups->locazione_id = $request->locazione;
+            $ups->numero_serie = $request->numero_serie;
             $ups->ip_address = $request->ip_address;
-            $ups->modello = $request->modello;            
-            $ups->stato = ($request->stato == '') ? -1 : $request->stato;                        
+            $ups->modello = $request->modello;
+            $ups->stato = ($request->stato == '') ? -1 : $request->stato;
             $ups->save();
-            
-            return response()->json(['viewinfo' => 'Salvato!']);         
+
+            return response()->json(['viewinfo' => 'Salvato!']);
 
         } catch (\Exception $e) {
 
@@ -146,7 +162,7 @@ class UpsController extends Controller
             $ups = Ups::findOrFail($id);
             $ups->delete();
 
-            return response()->json(['viewinfo' =>'Ups cancellato con successo!']);          
+            return response()->json(['viewinfo' =>'Ups cancellato con successo!']);
 
         } catch (\Exception $e) {
 
@@ -161,25 +177,25 @@ class UpsController extends Controller
      * Refresh Map.
      */
     public function refreshmap($id, $stato, $keyp)
-    { 
+    {
         $urlParam = [
-            'id' => $id,
-            'stato' => $stato,
+            // 'id' => $id,
+            // 'stato' => $stato,
             'keyp' => $keyp
         ];
 		$validator = Validator::make($urlParam, [
-            'id' => 'required|numeric',
-            'stato' => 'required|numeric',
+            // 'id' => 'required|numeric',
+            // 'stato' => 'required|numeric',
             'keyp' => 'required'
         ]);
 
 		if ($validator->fails() && $keyp != '(K.e223ef£74H0') {
 				return -1;
         }
-        
-        $ups = \App\Ups::find($id);        
-        $ups->stato = $stato;
-        $ups->save();
+
+        // $ups = \App\Ups::find($id);
+        // $ups->stato = $stato;
+        // $ups->save();
         broadcast(new \App\Events\UpsStatusUpdated($ups));
         return 'ok';
     }
