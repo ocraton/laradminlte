@@ -15,9 +15,10 @@ class Locazione extends Model
         'citta',
         'provincia',
         'lat',
-        'lon'
+        'lon',
+        'dataloc'
     ];
-  
+
     public function user()
     {
         return $this->belongsTo(User::class);
@@ -37,5 +38,5 @@ class Locazione extends Model
     {
         return str_limit($this->indirizzo, 40);
     }
-  
+
 }

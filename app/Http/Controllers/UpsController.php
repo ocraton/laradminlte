@@ -176,16 +176,12 @@ class UpsController extends Controller
     /**
      * Refresh Map.
      */
-    public function refreshmap($id, $stato, $keyp)
+    public function refreshmap($keyp)
     {
         $urlParam = [
-            // 'id' => $id,
-            // 'stato' => $stato,
             'keyp' => $keyp
         ];
 		$validator = Validator::make($urlParam, [
-            // 'id' => 'required|numeric',
-            // 'stato' => 'required|numeric',
             'keyp' => 'required'
         ]);
 
@@ -193,10 +189,7 @@ class UpsController extends Controller
 				return -1;
         }
 
-        // $ups = \App\Ups::find($id);
-        // $ups->stato = $stato;
-        // $ups->save();
-        broadcast(new \App\Events\UpsStatusUpdated($ups));
+        broadcast(new \App\Events\UpsStatusUpdated());
         return 'ok';
     }
 

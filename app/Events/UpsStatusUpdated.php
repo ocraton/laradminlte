@@ -16,16 +16,16 @@ class UpsStatusUpdated implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
-    public $ups;
+
     /**
      * Create a new event instance.
      *
      * @return void
      */
 
-    public function __construct(Ups $ups)
+    public function __construct()
     {
-        $this->ups = $ups;
+
     }
 
     /**
@@ -41,9 +41,7 @@ class UpsStatusUpdated implements ShouldBroadcast
     public function broadcastWith()
     {
         return [
-            'ups_id' => $this->ups->id,
-            'ups_stato' => $this->ups->stato,
-            'ups_numero_serie' => $this->ups->numero_serie
+            'status' => 'refresh',
         ];
     }
 
