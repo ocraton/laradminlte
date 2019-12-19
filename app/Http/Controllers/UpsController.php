@@ -100,7 +100,8 @@ class UpsController extends Controller
             $ups_view = view('ups.getinfo', compact('ups'))->render();
             return response()->json(['viewinfo' => $ups_view]);
         } else {
-            return redirect('ups');
+            if($ups) return view('ups.infopin', compact('ups'));
+            else return redirect('ups');
         }
     }
 

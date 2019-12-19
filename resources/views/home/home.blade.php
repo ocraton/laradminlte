@@ -152,7 +152,9 @@ $( document ).ready(function() {
           @foreach($locazione->ups as $ups)
             {'id': '{{ $ups->id }}', 'numero_serie': '{{ $ups->numero_serie }}',
             'stato': "{{ $ups->stato }}", 'ip_address': '{{ $ups->ip_address }}',
-            'alarm_detail': '{!! preg_replace( "/\r\n|\r|\n/", " ", html_entity_decode($ups->alarm_detail)) !!}'  },
+            'alarm_detail': '{!! preg_replace( "/\r\n|\r|\n/", " ", html_entity_decode($ups->alarm_detail)) !!}',
+            'info': '{!! preg_replace( "/\r\n|\r|\n/", " ", html_entity_decode($ups->info)) !!}'
+            },
           @endforeach
         ]
       ],
@@ -166,10 +168,10 @@ $( document ).ready(function() {
 
   function add_marker(lat, long, cliente, locazioneId, indirizzo, ups) {
 
-    const coloreStatoDefault = '#75d35b'
-    const coloreStato0 = '#75d35b'
-    const coloreStato1 = '#ffd400'
-    const coloreStato2 = '#e54b4b'
+    const coloreStatoDefault = '#75d35b';
+    const coloreStato0 = '#75d35b';
+    const coloreStato1 = '#ffd400';
+    const coloreStato2 = '#e54b4b';
 
     upsHtml = '';
     let countRosso = countGiallo = 0;
@@ -179,8 +181,10 @@ $( document ).ready(function() {
       if(ups[i].stato != 1 && ups[i].stato != 2) {coloreTestoUps = '#424242'};
       upsHtml += '<span style="color:'+coloreTestoUps+'">Numero Serie: '+
       ups[i].numero_serie+' stato: '+ups[i].stato +
-      '<br><table style="width:100%">'+ups[i].alarm_detail+'</table>'+
-      '<br><a href="http://'+ups[i].ip_address+'" target="_blank">vai</a></span> <hr>';
+      '<br><a href="http://'+ups[i].ip_address+'" target="_blank">vai</a>'+
+      ' | <a href="#" onclick="window.open(\' ups/getinfo/'+ups[i].id+'\',\'name\',\'width=600,height=400\')" class="btnUpsInfoPin">info</a></span>';
+      if(ups[i].alarm_detail != '') upsHtml += '<br><table style="width:100%">'+ups[i].alarm_detail+'</table>';
+      upsHtml += '<hr>';
     }
 
     let coloreMarker = coloreStatoDefault;
@@ -212,8 +216,11 @@ $( document ).ready(function() {
     // add marker
     var marker = L.marker(point, {icon: cIcon}).addTo(map);
     // add popup
-    marker.bindPopup('<p><b><span style="font-size: 1rem">'+cliente+'</span> <br> id:'+locazioneId+' - '+indirizzo+'</b><br><br>'+upsHtml+'</p>');
+    marker.bindPopup('<p><b><span style="font-size: 1rem">'+cliente+'</span> <br> id:'+locazioneId+' - '+
+    indirizzo+'</b><br><br>'+upsHtml+'</p>');
   }
+
+
 
 
   window.Echo.channel('upsstatus')
