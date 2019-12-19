@@ -182,6 +182,7 @@ $( document ).ready(function() {
       upsHtml += '<span style="color:'+coloreTestoUps+'">Numero Serie: '+
       ups[i].numero_serie+' stato: '+ups[i].stato +
       '<br><a href="http://'+ups[i].ip_address+'" target="_blank">vai</a>'+
+      '<br><a href="ftp://'+ups[i].ip_address+'" target="_blank">files</a>'+
       ' | <a href="#" onclick="window.open(\' ups/getinfo/'+ups[i].id+'\',\'name\',\'width=600,height=400\')" class="btnUpsInfoPin">info</a></span>';
       if(ups[i].alarm_detail != '') upsHtml += '<br><table style="width:100%">'+ups[i].alarm_detail+'</table>';
       upsHtml += '<hr>';
