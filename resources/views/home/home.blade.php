@@ -65,7 +65,7 @@
                             </table>
                             @endif
                             <br>
-                            <a href="http://{{ $upsitem->ip_address }}" target="_blank" class="btn btn-outline-primary btn-xs">vai <i class="fas fa-angle-right"></i></a>
+                            <a href="http://{{ $upsitem->ip_address }}" target="_blank" class="btn btn-outline-primary btn-xs vaiBtn">vai <i class="fas fa-angle-right"></i></a>
                              |
                             <a href="{{ route('ups.getinfo', $upsitem->id) }}" class="btn btn-outline-info btn-xs upsInfoDetail">info <i class="icon fa fa-info"></i></a>
                           </p>
@@ -181,7 +181,7 @@ $( document ).ready(function() {
       if(ups[i].stato != 1 && ups[i].stato != 2) {coloreTestoUps = '#424242'};
       upsHtml += '<span style="color:'+coloreTestoUps+'">Numero Serie: '+
       ups[i].numero_serie+' stato: '+ups[i].stato +
-      '<br><a href="http://'+ups[i].ip_address+'" target="_blank">vai</a>'+
+      '<br><a class="vaiBtn" href="http://'+ups[i].ip_address+'" target="_blank">vai</a>'+
       '<br><a href="ftp://'+ups[i].ip_address+'" target="_blank">files</a>'+
       ' | <a href="#" onclick="window.open(\' ups/getinfo/'+ups[i].id+'\',\'name\',\'width=600,height=400\')" class="btnUpsInfoPin">info</a></span>';
       if(ups[i].alarm_detail != '') upsHtml += '<br><table style="width:100%">'+ups[i].alarm_detail+'</table>';
@@ -234,6 +234,29 @@ $( document ).ready(function() {
       location.reload(true);
     }
 
+    $('body').on('click', '.vaiBtn', function (event) {
+      event.preventDefault();
+      const url = $(this).attr('href');
+      swal("Attenzione! L'operazione potrebbe consumare traffico. Continui?", {
+        buttons: {
+          cancel: "NO",
+          catch: {
+            text: "SI",
+            value: "catch",
+          }
+        },
+      }).then((value) => {
+        switch (value) {      
+          case "catch":
+            swal.close();
+            window.open(url, '_blank');            
+            break;    
+          default:
+            
+        }
+      });
+
+    });
 
 </script>
 @endsection
