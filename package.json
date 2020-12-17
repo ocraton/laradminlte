@@ -22,7 +22,7 @@
         "@fortawesome/fontawesome-free": "^5.11.2",
         "admin-lte": "^3.0.0",
         "bootstrap-select": "^1.13.12",
-        "datatables.net": "^1.10.20",
+        "datatables.net": "^1.10.22",
         "datatables.net-dt": "^1.10.20",
         "inputmask": "^4.0.9",
         "laravel-echo": "^1.6.1",
