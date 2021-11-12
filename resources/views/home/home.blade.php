@@ -55,7 +55,7 @@
                   @if(count($ups) > 0)
                     @foreach($ups as $upsitem)
                     <li class="list-group-item @if($upsitem->stato == 2) list-group-item-danger @elseif($upsitem->stato == 1) list-group-item-warning @else @endif">
-                          <p >
+                          <p>
                             Numero di serie:
                             <br>
                             {{ $upsitem->numero_serie }}
@@ -76,7 +76,7 @@
                             provincia: {{ $upsitem->locazione->provincia }} -
                             citta: {{ $upsitem->locazione->citta }} -
                             indirizzo: {{ $upsitem->locazione->indirizzo }}
-                          </p >
+                          </p>
                     </li>
                     @endforeach
                   @else

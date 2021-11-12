@@ -74,8 +74,22 @@
                             </div>
                         </div>                                
                     </div>
-                    <input type="hidden" name="lat" id="lat" value="{{ $locazioni->lat }}">
-                    <input type="hidden" name="lon" id="lon" value="{{ $locazioni->lon }}">
+                    <div class="row">                        
+                        <div class="form-group col-sm-3">
+                            <div class="form-group">                                
+                                <input type="lat" name="lat" class="form-control" 
+                                id="lat" placeholder="lat" value="{{ $locazioni->lat }}"
+                                maxlength="200" required>
+                            </div>
+                        </div>
+                        <div class="form-group col-sm-3">
+                            <div class="form-group">                                
+                                <input type="lon" name="lon" class="form-control" 
+                                id="lon" placeholder="lon" value="{{ $locazioni->lon }}"
+                                maxlength="200" required >
+                            </div>
+                        </div>                        
+                    </div>
                     <button type="button" class="btn btn-success" id="btnSubmit">Salva</button>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Chiudi</button>
                 </div>

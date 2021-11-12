@@ -19,31 +19,31 @@ class LocazioniController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {        
-        $role = Auth::user()->getRoleNames();               
+    {
+        $role = Auth::user()->getRoleNames();
         if($role[0] == 'cliente') {
             $locazioni = Locazione::where('user_id', Auth::id())->latest()->paginate(10);
         } else {
             $locazioni = Locazione::latest()->paginate(10);
-        }             
+        }
         return view('locazioni.index',compact('locazioni'));
     }
 
-    public function getLocazioniList() 
+    public function getLocazioniList()
     {
         $role = Auth::user()->getRoleNames();
-        if($role[0] == 'cliente') {            
+        if($role[0] == 'cliente') {
             return Laratables::recordsOf(Locazione::class, function($query)
             {
                 return $query->where('user_id', Auth::id())->with('user');
-            });            
-        } else {            
+            });
+        } else {
             return Laratables::recordsOf(Locazione::class, function($query)
             {
                 return $query->with('user');
             });
         }
-        
+
     }
 
     /**
@@ -67,16 +67,16 @@ class LocazioniController extends Controller
     {
         try {
 
-            $locazione->user_id = $request->cliente;            
-            $locazione->regione = $request->regione;            
-            $locazione->provincia = $request->provincia;            
-            $locazione->citta = $request->citta;            
+            $locazione->user_id = $request->cliente;
+            $locazione->regione = $request->regione;
+            $locazione->provincia = $request->provincia;
+            $locazione->citta = $request->citta;
             $locazione->indirizzo = $request->indirizzo;
-            $locazione->lat = $request->lat; 
-            $locazione->lon = $request->lon;                         
+            $locazione->lat = str_replace(',', '.', $request->lat);
+            $locazione->lon = str_replace(',', '.', $request->lon);                         
             $locazione->save();
 
-            flash()->success('Locazione creata!');          
+            flash()->success('Locazione creata!');
 
         } catch (\Exception $e) {
 
@@ -94,10 +94,10 @@ class LocazioniController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show(Request $request, Locazione $locazioni)
-    {              
+    {
         if($request->ajax()) {
             $locazione_view = view('locazioni.show', compact('locazioni'))->render();
-            return response()->json(['viewinfo' => $locazione_view]); 
+            return response()->json(['viewinfo' => $locazione_view]);
         } else {
             return redirect('locazioni');
         }
@@ -111,10 +111,10 @@ class LocazioniController extends Controller
      */
     public function edit(Request $request, Locazione $locazioni)
     {
-        $clienti = User::role('cliente')->latest()->get();        
+        $clienti = User::role('cliente')->latest()->get();
         if($request->ajax()) {
             $locazione_view = view('locazioni.edit', compact('locazioni', 'clienti'))->render();
-            return response()->json(['viewinfo' => $locazione_view]); 
+            return response()->json(['viewinfo' => $locazione_view]);
         } else {
             return redirect('locazioni');
         }
@@ -130,17 +130,19 @@ class LocazioniController extends Controller
     public function update(LocazioneRequest $request)
     {
         try {
-            
+
             $locazione = Locazione::find($request->segment(2));
-            $locazione->user_id = $request->cliente;            
-            $locazione->regione = $request->regione;            
-            $locazione->provincia = $request->provincia;            
-            $locazione->citta = $request->citta;            
-            $locazione->indirizzo = $request->indirizzo;  
-                                 
+            $locazione->user_id = $request->cliente;
+            $locazione->regione = $request->regione;
+            $locazione->provincia = $request->provincia;
+            $locazione->citta = $request->citta;
+            $locazione->indirizzo = $request->indirizzo;
+            $locazione->lat = str_replace(',', '.', $request->lat);
+            $locazione->lon = str_replace(',', '.', $request->lon); 
+
             $locazione->save();
-            
-            return response()->json(['viewinfo' => 'Salvato!']);         
+
+            return response()->json(['viewinfo' => 'Salvato!']);
 
         } catch (\Exception $e) {
 
@@ -162,7 +164,7 @@ class LocazioniController extends Controller
             $locazione = Locazione::findOrFail($id);
             $locazione->delete();
 
-            return response()->json(['viewinfo' =>'Locazione cancellato con successo!']);          
+            return response()->json(['viewinfo' =>'Locazione cancellato con successo!']);
 
         } catch (\Exception $e) {
 

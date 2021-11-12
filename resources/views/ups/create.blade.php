@@ -87,7 +87,7 @@
 <script>
 $( document ).ready(function() {    
 
-    $("#ip_address").inputmask({ alias: "ip", "placeholder": "_" });
+    // $("#ip_address").inputmask({ alias: "ip", "placeholder": "_" });
     
     $('#btnSubmit').on('click', function(e){
 
